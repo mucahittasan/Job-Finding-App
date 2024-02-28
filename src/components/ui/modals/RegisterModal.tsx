@@ -5,15 +5,19 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
 import { RegisterSchema } from '@/schemas'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import Input from '../Input'
 import Modal from './index'
 
 const LoginModal = () => {
   const registerModal = useRegisterModal()
 
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const {
+    register,
     handleSubmit,
     formState: { errors },
     reset,
@@ -36,6 +40,33 @@ const LoginModal = () => {
     // Register form
   }
 
+  const bodyContent = (
+    <div className="flex flex-col gap-4">
+      <Input
+        id="email"
+        type="email"
+        label="Email"
+        disabled={false}
+        register={register}
+        errors={errors}
+        required
+        placeholder="test@gmail.com"
+        errorMessage={getErrorMessage('email')}
+      />
+      <Input
+        id="password"
+        type="password"
+        label="Password"
+        disabled={false}
+        register={register}
+        errors={errors}
+        required
+        placeholder="*******"
+        errorMessage={getErrorMessage('password')}
+      />
+    </div>
+  )
+
   const footerContent = (
     <footer className="text-center ">
       <p className="text-xs font-medium">
@@ -54,6 +85,7 @@ const LoginModal = () => {
       onSubmit={handleSubmit(onSubmit)}
       isOpen={registerModal.isOpen}
       title="Become a member!"
+      body={bodyContent}
       footer={footerContent}
       isLoading={isLoading}
     />
