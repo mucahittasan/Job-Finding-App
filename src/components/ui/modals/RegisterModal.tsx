@@ -10,7 +10,7 @@ import { useState } from 'react'
 import Input from '../Input'
 import Modal from './index'
 
-const LoginModal = () => {
+const RegisterModal = () => {
   const registerModal = useRegisterModal()
 
   const router = useRouter()
@@ -69,7 +69,7 @@ const LoginModal = () => {
 
   const footerContent = (
     <footer className="text-center ">
-      <p className="text-xs font-medium">
+      <p className="text-xs font-medium text-dark">
         Already have an account?{' '}
         <button className="text-primary_color font-semibold hover:underline">
           Sign in.
@@ -92,4 +92,4 @@ const LoginModal = () => {
   )
 }
 
-export default LoginModal
+export default RegisterModal

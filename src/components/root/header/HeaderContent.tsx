@@ -1,7 +1,12 @@
+'use client'
+
 import Button from '@/components/ui/Button'
+import useRegisterModal from '@/hooks/modals/useRegisterModal'
 import Link from 'next/link'
 
 const HeaderContent = () => {
+  const registerModal = useRegisterModal()
+
   return (
     <header className="flex px-4 h-20 items-center justify-between content">
       <Link
@@ -19,7 +24,9 @@ const HeaderContent = () => {
           Login
         </Button>
         <Button
-          // onClick={() => {}}
+          onClick={() => {
+            registerModal.onOpen()
+          }}
           variant={'secondary'}
           className="font-semibold md:text-base text-xs md:h-10 h-8 transition duration-200 hover:scale-[1.05] w-[98px]"
         >

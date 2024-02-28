@@ -28,7 +28,6 @@ const Modal: React.FC<ModalProps> = ({
   useEffect(() => {
     setShowModal(isOpen)
   }, [isOpen])
-
   const handleClose = useCallback(() => {
     if (isLoading) {
       return
@@ -67,7 +66,9 @@ const Modal: React.FC<ModalProps> = ({
           <div className="px-6 pb-6 pt-8 translate h-full lg:h-auto md:h-auto border-0 rounded-[20px] shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/* HEADER */}
             <div className=" flex items-center rounded-t justify-center relative mb-6">
-              <h2 className="font-semibold md:text-3xl text-2xl">{title}</h2>
+              <h2 className="font-semibold md:text-3xl text-2xl text-dark">
+                {title}
+              </h2>
             </div>
             {/* BODY */}
             <div className="relative flex-auto py-6">{body}</div>
@@ -78,7 +79,7 @@ const Modal: React.FC<ModalProps> = ({
                   isLoading={isLoading}
                   onClick={handleSubmit}
                   variant="secondary"
-                  className="w-full rounded-[20px] !text-sm"
+                  className="w-full rounded-[20px] !text-sm bg-dark hover:bg-dark/80"
                 >
                   {actionLabel}
                 </Button>

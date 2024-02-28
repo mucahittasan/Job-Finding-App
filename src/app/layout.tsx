@@ -1,4 +1,5 @@
 import Header from '@/components/root/header/Header'
+import RegisterModal from '@/components/ui/modals/RegisterModal'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
@@ -25,6 +26,7 @@ export default function RootLayout({
         className={`${poppins.className}  bg-gradient-to-br from-dark to-[rgb(12,1,17)] min-h-screen text-white relative`}
       >
         <Header />
+        <RegisterModal />
         <main>{children}</main>
       </body>
     </html>
