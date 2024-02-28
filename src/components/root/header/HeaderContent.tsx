@@ -6,7 +6,7 @@ const HeaderContent = () => {
     <header className="flex px-4 h-20 items-center justify-between content">
       <Link
         href={'/'}
-        className="text-3xl font-bold"
+        className="md:text-3xl text-2xl font-bold"
       >
         ACME
       </Link>
