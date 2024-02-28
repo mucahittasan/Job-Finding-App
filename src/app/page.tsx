@@ -1,5 +1,11 @@
+import HomeContent from '@/components/root/home/HomeContent'
+
 const Home = () => {
-  return <div>Hello Worl</div>
+  return (
+    <>
+      <HomeContent />
+    </>
+  )
 }
 
 export default Home
