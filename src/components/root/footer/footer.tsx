@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <footer className="max-w-7xl mx-auto w-full flex items-center justify-between py-6">
+    <footer className="content flex items-center justify-between py-6">
       <Link
         href={'/'}
-        className="font-bold text-3xl"
+        className="font-bold text-3xl "
       >
         ACME
       </Link>

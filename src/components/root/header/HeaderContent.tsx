@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const HeaderContent = () => {
   return (
-    <header className="flex px-4 h-20 items-center justify-between max-w-7xl mx-auto w-full">
+    <header className="flex px-4 h-20 items-center justify-between content">
       <Link
         href={'/'}
         className="text-3xl font-bold"
