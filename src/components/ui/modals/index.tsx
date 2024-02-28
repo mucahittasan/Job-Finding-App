@@ -1,5 +1,6 @@
 'use client'
 import Button from '@/components/ui/Button'
+import { X } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
 interface ModalProps {
@@ -59,10 +60,16 @@ const Modal: React.FC<ModalProps> = ({
         {/* CONTENT */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`translate duration-300 h-full ${
+          className={`translate duration-300 h-full relative ${
             showModal ? 'scale-[1]' : 'scale-[0]'
           } ${showModal ? 'opacity-100' : 'opacity-0'}`}
         >
+          <button
+            onClick={handleClose}
+            className="absolute top-2 right-2  z-[999]"
+          >
+            <X className=" transition-all text-dark hover:text-dark/60" />
+          </button>
           <div className="px-6 pb-6 pt-8 translate h-full lg:h-auto md:h-auto border-0 rounded-[20px] shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/* HEADER */}
             <div className=" flex items-center rounded-t justify-center relative mb-6">
@@ -79,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({
                   isLoading={isLoading}
                   onClick={handleSubmit}
                   variant="secondary"
-                  className="w-full rounded-[20px] !text-sm bg-dark hover:bg-dark/80"
+                  className="w-full rounded-[20px] !text-sm bg-dark hover:bg-dark/80  "
                 >
                   {actionLabel}
                 </Button>
