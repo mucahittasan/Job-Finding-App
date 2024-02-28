@@ -21,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body
+        className={`${poppins.className}  bg-gradient-to-br from-dark to-[rgb(12,1,17)] min-h-screen text-white relative`}
+      >
         <Header />
         {children}
       </body>
