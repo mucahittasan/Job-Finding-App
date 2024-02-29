@@ -1,12 +1,11 @@
-export type Job = {
+export interface Job {
   name: string
-  createdAt: string
-  location: string
   companyName: string
   keywords: string[]
-  id: string
-  descriptiont: string
+  description: string
   salary: number
+  location: string
+  createdAt?: string
 }
 
 export const jobs = [

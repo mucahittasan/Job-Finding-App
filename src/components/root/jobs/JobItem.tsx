@@ -14,6 +14,7 @@ interface JobItemProps {
   description: string
   salary: number
   location: string
+  createdAt: string
 }
 
 const JobItem: FC<JobItemProps> = ({
@@ -23,6 +24,7 @@ const JobItem: FC<JobItemProps> = ({
   description,
   salary,
   location,
+  createdAt,
 }) => {
   const jobDetailModal = useJobDetailModal()
 
@@ -74,7 +76,18 @@ const JobItem: FC<JobItemProps> = ({
       <div className="flex flex-col gap-y-4 items-start">
         <Button
           className="w-full"
-          onClick={() => jobDetailModal.onOpen()}
+          onClick={() => {
+            jobDetailModal.setCurrentJob({
+              name: jobName,
+              companyName,
+              keywords,
+              description,
+              salary,
+              location,
+              createdAt,
+            })
+            jobDetailModal.onOpen()
+          }}
         >
           Detail
         </Button>

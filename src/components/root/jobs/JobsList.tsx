@@ -20,6 +20,7 @@ const JobsList = () => {
           description={job.description}
           salary={job.salary}
           location={job.location}
+          createdAt={job.createdAt}
         />
       ))}
     </MotionDiv>

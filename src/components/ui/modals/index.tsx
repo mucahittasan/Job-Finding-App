@@ -56,7 +56,7 @@ const Modal: React.FC<ModalProps> = ({
       onClick={() => handleClose()}
       className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-dark/70"
     >
-      <div className="relative md:w-[400px] min-[550px]:w-[70%] w-[95%] mx-auto h-auto">
+      <div className="relative md:w-[450px] min-[550px]:w-[70%] w-[95%] mx-auto h-auto">
         {/* CONTENT */}
         <div
           onClick={(e) => e.stopPropagation()}

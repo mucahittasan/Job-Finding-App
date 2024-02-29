@@ -39,7 +39,7 @@ const FilterMenu = () => {
     >
       <Button
         onClick={() => setOpen((prev) => !prev)}
-        className="bg-gradient-to-tr from-primary_color/70 to-secondary_color bg-dark/10 text-white font-semibold active:scale-[.97] "
+        className="bg-gradient-to-tr from-primary_color to-secondary_color hover:from-primary_color/80 hover:to-secondary_color/90 text-white font-semibold active:scale-[.97] "
       >
         <span>Selected Field</span>
         <ChevronDown
@@ -73,7 +73,7 @@ const FilterMenu = () => {
                 activeFilter === button.text
                   ? 'bg-primary_color text-white'
                   : 'bg-dark/80 text-white'
-              }  w-full text-left p-1.5 text-sm font-medium  rounded-sm transition-all duration-200`}
+              }  w-full text-left p-1.5 text-sm font-medium  rounded-md transition-all duration-200`}
               onClick={() => handleClick(button.text)}
             >
               {button.text}
