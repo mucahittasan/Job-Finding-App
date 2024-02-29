@@ -1,8 +1,10 @@
-import Header from '@/components/root/header/Header'
-import RegisterModal from '@/components/ui/modals/RegisterModal'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
+
+import Header from '@/components/root/header/Header'
+import LoginModal from '@/components/ui/modals/LoginModal'
+import RegisterModal from '@/components/ui/modals/RegisterModal'
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -27,6 +29,7 @@ export default function RootLayout({
       >
         <Header />
         <RegisterModal />
+        <LoginModal />
         <main>{children}</main>
       </body>
     </html>

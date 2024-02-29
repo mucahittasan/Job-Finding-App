@@ -36,8 +36,6 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   errorMessage,
 }) => {
-  console.log(errorMessage)
-
   return (
     <div className="w-full relative">
       <label
@@ -56,7 +54,7 @@ const Input: React.FC<InputProps> = ({
         {...register(id, { required })}
         placeholder={placeholder}
         className={`
-                    w-full text-sm py-2 font-medium bg-white border-[1px] rounded-lg outline-none transition disabled:opacity-70 disabled:cursor-not-allowed pl-4 ${
+                    w-full text-sm text-dark py-2 font-medium bg-white border-[1px] rounded-lg outline-none transition disabled:opacity-70 disabled:cursor-not-allowed pl-4 ${
                       errors[id]
                         ? 'border-rose-500 focus:border-rose-500'
                         : 'border-gray_color/40 focus:border-dark/80'

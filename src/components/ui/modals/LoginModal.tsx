@@ -12,9 +12,9 @@ import Modal from './index'
 import useLoginModal from '@/hooks/modals/useLoginModal'
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
 
-const RegisterModal = () => {
-  const registerModal = useRegisterModal()
+const LoginModal = () => {
   const loginModal = useLoginModal()
+  const registerModal = useRegisterModal()
 
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -40,7 +40,7 @@ const RegisterModal = () => {
     console.log(data)
     setIsLoading(true)
 
-    // Register form
+    // login form
   }
 
   const bodyContent = (
@@ -73,15 +73,15 @@ const RegisterModal = () => {
   const footerContent = (
     <footer className="text-center ">
       <p className="text-xs font-medium text-dark">
-        Already have an account?{' '}
+        Don't you have an account?{' '}
         <button
           onClick={() => {
-            registerModal.onClose()
-            loginModal.onOpen()
+            loginModal.onClose()
+            registerModal.onOpen()
           }}
           className="text-primary_color font-semibold hover:underline"
         >
-          Sign in.
+          Sign up.
         </button>{' '}
       </p>
     </footer>
@@ -89,11 +89,11 @@ const RegisterModal = () => {
 
   return (
     <Modal
-      onClose={registerModal.onClose}
-      actionLabel="Register"
+      onClose={loginModal.onClose}
+      actionLabel="Login"
       onSubmit={handleSubmit(onSubmit)}
-      isOpen={registerModal.isOpen}
-      title="Become a member!"
+      isOpen={loginModal.isOpen}
+      title="Welcome Back!"
       body={bodyContent}
       footer={footerContent}
       isLoading={isLoading}
@@ -101,4 +101,4 @@ const RegisterModal = () => {
   )
 }
 
-export default RegisterModal
+export default LoginModal

@@ -86,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({
                   isLoading={isLoading}
                   onClick={handleSubmit}
                   variant="secondary"
-                  className="w-full rounded-[20px] !text-sm bg-dark hover:bg-dark/80  "
+                  className="w-full rounded-[20px] !text-sm !bg-dark hover:!bg-dark/80  "
                 >
                   {actionLabel}
                 </Button>
