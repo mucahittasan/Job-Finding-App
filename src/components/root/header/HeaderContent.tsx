@@ -6,13 +6,20 @@ import Button from '@/components/ui/Button'
 
 import useLoginModal from '@/hooks/modals/useLoginModal'
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
+import { usePathname } from 'next/navigation'
 
 const HeaderContent = () => {
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
 
+  const pathname = usePathname()
+
   return (
-    <header className="flex px-4 h-20 items-center justify-between content">
+    <header
+      className={`flex px-4 py-6 items-center justify-between ${
+        pathname === '/' && 'content'
+      }`}
+    >
       <Link
         href={'/'}
         className="md:text-3xl text-2xl font-bold"
