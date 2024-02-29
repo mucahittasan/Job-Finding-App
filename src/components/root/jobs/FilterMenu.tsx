@@ -25,10 +25,8 @@ const FilterMenu = () => {
   }
 
   useEffect(() => {
-    // Add event listener when the component mounts
     document.addEventListener('mousedown', handleClickOutside)
 
-    // Remove event listener when the component unmounts
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }

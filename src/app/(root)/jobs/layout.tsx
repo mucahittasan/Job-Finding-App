@@ -16,7 +16,7 @@ export default function Layout({
 }>) {
   return (
     <div className="flex gap-x-8">
-      <div className="flex-[2.5]">
+      <div className="flex-[2.8]">
         <Header />
         {children}
       </div>

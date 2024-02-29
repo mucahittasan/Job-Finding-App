@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: 'Acme',
   description:
     'Explore a variety of job opportunities with Acme. Find the perfect job that suits your skills and interests. Discover a range of positions in different industries and start your career journey today.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
