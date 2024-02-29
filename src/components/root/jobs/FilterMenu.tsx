@@ -72,7 +72,7 @@ const FilterMenu = () => {
               className={` ${
                 activeFilter === button.text
                   ? 'bg-primary_color text-white'
-                  : 'bg-dark/80 text-white'
+                  : 'bg-transparent text-dark  hover:text-primary_color'
               }  w-full text-left p-1.5 text-sm font-medium  rounded-md transition-all duration-200`}
               onClick={() => handleClick(button.text)}
             >

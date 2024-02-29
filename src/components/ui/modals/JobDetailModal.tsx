@@ -69,7 +69,7 @@ const JobDetailModal = () => {
         <span className="font-bold text-lg text-primary_color">
           Job Description
         </span>
-        <p className="text-sm font-medium text-gray_color border-2 border-gray_color/20 p-2 rounded-lg">
+        <p className="text-sm font-medium text-gray_color border-2 border-gray_color/20 p-2 rounded-lg max-h-[100px] overflow-y-auto">
           {currentJob?.description}
         </p>
       </div>
