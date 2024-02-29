@@ -1,3 +1,14 @@
+export type Job = {
+  name: string
+  createdAt: string
+  location: string
+  companyName: string
+  keywords: string[]
+  id: string
+  descriptiont: string
+  salary: number
+}
+
 export const jobs = [
   {
     name: 'Chief Research Supervisor',
