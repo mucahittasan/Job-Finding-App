@@ -42,7 +42,12 @@ const FilterMenu = () => {
         className="bg-gradient-to-tr from-primary_color/70 to-secondary_color bg-dark/10 text-white font-semibold active:scale-[.97] "
       >
         <span>Selected Field</span>
-        <ChevronDown size={20} />
+        <ChevronDown
+          size={20}
+          className={`transition duration-200 ${
+            open ? 'rotate-180' : 'rotate-0'
+          }`}
+        />
       </Button>
       <div
         className={`${
@@ -68,7 +73,7 @@ const FilterMenu = () => {
                 activeFilter === button.text
                   ? 'bg-primary_color text-white'
                   : 'bg-dark/80 text-white'
-              }  w-full text-left p-1 text-sm font-medium  rounded-sm transition-all duration-200`}
+              }  w-full text-left p-1.5 text-sm font-medium  rounded-sm transition-all duration-200`}
               onClick={() => handleClick(button.text)}
             >
               {button.text}
