@@ -1,6 +1,11 @@
+'use client'
+
+import Button from '@/components/ui/Button'
+import useJobDetailModal from '@/hooks/modals/jobDetailModal'
+import { MotionDiv } from '@/utils/motions/Motions'
+import { jobItemVariants } from '@/utils/motions/Variant'
 import { Briefcase } from 'lucide-react'
 import { FC } from 'react'
-import Button from '../../ui/Button'
 
 interface JobItemProps {
   jobName: string
@@ -19,6 +24,8 @@ const JobItem: FC<JobItemProps> = ({
   salary,
   location,
 }) => {
+  const jobDetailModal = useJobDetailModal()
+
   const firstThreeKeywords = () => {
     return keywords.length > 0 ? keywords.slice(0, 3) : []
   }
@@ -26,7 +33,12 @@ const JobItem: FC<JobItemProps> = ({
   const firstThree = firstThreeKeywords()
 
   return (
-    <div className="flex justify-between border-b border-b-gray_color/50 py-4">
+    <MotionDiv
+      variants={jobItemVariants}
+      initial="hidden"
+      animate="visible"
+      className="flex justify-between border-b border-b-gray_color/50 py-4"
+    >
       <div className="flex gap-4">
         <Briefcase size={50} />
         <div className="flex flex-col items-start gap-y-4 ">
@@ -60,12 +72,17 @@ const JobItem: FC<JobItemProps> = ({
         </div>
       </div>
       <div className="flex flex-col gap-y-4 items-start">
-        <Button className="w-full">Detail</Button>
+        <Button
+          className="w-full"
+          onClick={() => jobDetailModal.onOpen()}
+        >
+          Detail
+        </Button>
         <Button className="w-full !bg-white/20 text-white hover:!bg-white/30">
           Withdraw
         </Button>
       </div>
-    </div>
+    </MotionDiv>
   )
 }
 

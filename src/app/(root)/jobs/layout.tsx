@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 
+import Header from '@/components/root/header/Header'
 import AppliedJobSidebar from '@/components/root/jobs/AppliedJobSidebar'
-import Header from '../../../components/root/header/Header'
+import JobDetailModal from '@/components/ui/modals/JobDetailModal'
 
 export const metadata: Metadata = {
   title: 'Acme | Jobs',
@@ -18,6 +19,8 @@ export default function Layout({
     <div className="flex gap-x-8">
       <div className="flex-[2.8]">
         <Header />
+        <JobDetailModal />
+
         {children}
       </div>
       <AppliedJobSidebar />
