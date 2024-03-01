@@ -1,8 +1,8 @@
+import Footer from '@/components/root/footer/footer'
+import Header from '@/components/root/header/Header'
 import HomeContent from '@/components/root/home/HomeContent'
-import Footer from '../../components/root/footer/footer'
-import Header from '../../components/root/header/Header'
 
-const Home = () => {
+const Home = async () => {
   return (
     <>
       <Header />
