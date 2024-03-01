@@ -12,6 +12,8 @@ interface ModalProps {
   footer?: React.ReactElement
   actionLabel: string
   isLoading?: boolean
+  secondaryAction?: () => void
+  secondaryActionLabel?: string
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -23,6 +25,8 @@ const Modal: React.FC<ModalProps> = ({
   footer,
   actionLabel,
   isLoading,
+  secondaryAction,
+  secondaryActionLabel,
 }) => {
   const [showModal, setShowModal] = useState(isOpen)
 
@@ -39,6 +43,14 @@ const Modal: React.FC<ModalProps> = ({
       onClose()
     }, 300)
   }, [isLoading, onClose])
+
+  const handleSecondaryAction = useCallback(() => {
+    if (isLoading || !secondaryAction) {
+      return
+    }
+
+    secondaryAction()
+  }, [isLoading, secondaryAction])
 
   const handleSubmit = useCallback(() => {
     if (isLoading) {
@@ -82,6 +94,15 @@ const Modal: React.FC<ModalProps> = ({
             {/* FOOTER */}
             <div className="flex flex-col gap-2">
               <div className="flex flex-row items-center gap-4 w-full">
+                {secondaryAction && secondaryActionLabel && (
+                  <Button
+                    isLoading={isLoading}
+                    onClick={handleSecondaryAction}
+                    className="w-full rounded-[20px] !text-sm !text-dark border border-dark hover:!bg-dark/5"
+                  >
+                    {secondaryActionLabel}
+                  </Button>
+                )}
                 <Button
                   isLoading={isLoading}
                   onClick={handleSubmit}

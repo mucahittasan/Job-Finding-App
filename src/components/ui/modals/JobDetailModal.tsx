@@ -10,15 +10,13 @@ const JobDetailModal = () => {
 
   const { currentJob, isOpen, onClose } = useJobDetailModal()
 
-  const formattedDate = currentJob?.createdAt
-    ? useCustomDateFormatter(currentJob?.createdAt)
-    : ''
+  const formattedDate = useCustomDateFormatter(currentJob?.createdAt) || ''
 
   const handleSubmit = () => {}
 
   const bodyContent = (
     <div className="text-dark pb-2 flex flex-col gap-y-2">
-      <div className="flex gap-x-2 items-center">
+      <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
         <span className="font-bold text-lg text-primary_color">
           Company Name:
         </span>
@@ -26,13 +24,13 @@ const JobDetailModal = () => {
           {currentJob?.companyName}
         </span>
       </div>
-      <div className="flex gap-x-2 items-center">
+      <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
         <span className="font-bold text-lg text-primary_color">Job Name:</span>
         <span className="text-base text-gray_color font-semibold">
           {currentJob?.name}
         </span>
       </div>
-      <div className="flex gap-x-2 items-center">
+      <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
         <span className="font-bold text-lg text-primary_color">
           Created At:
         </span>
@@ -40,7 +38,7 @@ const JobDetailModal = () => {
           {formattedDate}
         </span>
       </div>
-      <div className="flex gap-x-2 items-center">
+      <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
         <span className="font-bold text-lg text-primary_color">Location: </span>
         <span className="text-base text-gray_color font-semibold">
           {currentJob?.location}
@@ -85,6 +83,8 @@ const JobDetailModal = () => {
       title="Apply Job"
       body={bodyContent}
       isLoading={isLoading}
+      secondaryAction={onClose}
+      secondaryActionLabel="Cancel"
     />
   )
 }
