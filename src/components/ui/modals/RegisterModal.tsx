@@ -11,6 +11,9 @@ import Modal from './index'
 
 import useLoginModal from '@/hooks/modals/useLoginModal'
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { registerUser } from '../../../actions/user'
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
@@ -36,11 +39,38 @@ const RegisterModal = () => {
     return errors[fieldName]?.message
   }
 
+  const { mutate: registerMutate } = useMutation({
+    mutationFn: async (data: { email: string; password: string }) => {
+      const response = await registerUser({
+        email: data.email,
+        password: data.password,
+      })
+      return response.data
+    },
+    onSuccess: () => {
+      console.log('Login successful:')
+      registerModal.onClose()
+      router.refresh()
+    },
+    onError: (error: AxiosError) => {
+      console.error('Login failed:', error)
+    },
+  })
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data)
     setIsLoading(true)
 
-    // Register form
+    try {
+      registerMutate({
+        email: data.email as string,
+        password: data.password as string,
+      })
+    } catch (error) {
+      console.error('Error during registration:', error)
+    } finally {
+      setIsLoading(false)
+      reset()
+    }
   }
 
   const bodyContent = (
