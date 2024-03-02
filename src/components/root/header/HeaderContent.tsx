@@ -10,7 +10,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { User } from '../../../actions/user'
 import Popover from '../../ui/popover'
@@ -20,6 +20,7 @@ const HeaderContent = () => {
   const loginModal = useLoginModal()
 
   const pathname = usePathname()
+  const router = useRouter()
 
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [popover, setPopover] = useState(false)
@@ -29,6 +30,7 @@ const HeaderContent = () => {
     Cookies.remove('accessToken')
     setCurrentUser(null)
     setPopover(false)
+    router.push('/')
   }
 
   useEffect(() => {
