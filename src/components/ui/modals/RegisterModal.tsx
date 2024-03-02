@@ -13,6 +13,7 @@ import useLoginModal from '@/hooks/modals/useLoginModal'
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import toast from 'react-hot-toast'
 import { registerUser } from '../../../actions/user'
 
 const RegisterModal = () => {
@@ -48,12 +49,16 @@ const RegisterModal = () => {
       return response.data
     },
     onSuccess: () => {
-      console.log('Login successful:')
+      toast.success('Register success!')
       registerModal.onClose()
-      router.refresh()
+      loginModal.onOpen()
     },
     onError: (error: AxiosError) => {
-      console.error('Login failed:', error)
+      if (error.message) {
+        toast.error(error.message)
+      } else {
+        toast.error('An error occurred during login.')
+      }
     },
   })
 

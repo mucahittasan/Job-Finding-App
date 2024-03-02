@@ -21,10 +21,7 @@ export async function registerUser(userData: {
     const response = await axios.post(registerUrl(), userData, { headers })
     return response.data
   } catch (error: any) {
-    console.error(
-      'Error during registration:',
-      error.response?.data || error.message,
-    )
+    throw error.response?.data || error.message
   }
 }
 
@@ -35,6 +32,7 @@ export async function loginUser(userData: { email: string; password: string }) {
     return response.data
   } catch (error: any) {
     console.error('Error during login:', error.response?.data || error.message)
+    throw error.response?.data || error.message
   }
 }
 
@@ -45,9 +43,8 @@ export const refreshAccessToken = async (refreshToken: string) => {
     })
 
     return response.data.accessToken
-  } catch (error) {
-    console.error('Error refreshing access token:', error)
-    throw error
+  } catch (error: any) {
+    throw error.response?.data || error.message
   }
 }
 
@@ -56,9 +53,6 @@ export const fetchCurrentUser = async () => {
     const res = await axios.get('/api/user/')
     return res.data
   } catch (error: any) {
-    console.error(
-      'Error during fetching current user:',
-      error.response?.data || error.message,
-    )
+    throw error.response?.data || error.message
   }
 }

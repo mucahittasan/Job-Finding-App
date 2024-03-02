@@ -14,6 +14,7 @@ import useLoginModal from '@/hooks/modals/useLoginModal'
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import toast from 'react-hot-toast'
 import { loginUser } from '../../../actions/user'
 
 const LoginModal = () => {
@@ -46,19 +47,25 @@ const LoginModal = () => {
         email: data.email,
         password: data.password,
       })
-
+      console.log(response)
       if (response.accessToken) {
         Cookies.set('accessToken', response.accessToken, { expires: 7 })
         return response
       }
     },
     onSuccess: () => {
-      console.log('Registration successful:')
       loginModal.onClose()
-      window.location.reload()
+      toast.success('Login success!')
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
     },
     onError: (error: AxiosError) => {
-      console.error('Registration failed:', error)
+      if (error.message) {
+        toast.error(error.message)
+      } else {
+        toast.error('An error occurred during login.')
+      }
     },
   })
 
