@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 import { RegisterSchema } from '@/schemas'
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Input from '../Input'
@@ -47,14 +48,14 @@ const LoginModal = () => {
       })
 
       if (response.accessToken) {
-        localStorage.setItem('accessToken', response.accessToken)
+        Cookies.set('accessToken', response.accessToken, { expires: 7 })
         return response
       }
     },
     onSuccess: () => {
       console.log('Registration successful:')
       loginModal.onClose()
-      router.refresh()
+      window.location.reload()
     },
     onError: (error: AxiosError) => {
       console.error('Registration failed:', error)

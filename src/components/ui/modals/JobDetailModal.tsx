@@ -3,7 +3,7 @@
 import useJobDetailModal from '@/hooks/modals/jobDetailModal'
 import { useState } from 'react'
 import Modal from '.'
-import useCustomDateFormatter from '../../../hooks/modals/useFormatDate'
+import useCustomDateFormatter from '../../../hooks/useFormatDate'
 
 const JobDetailModal = () => {
   const [isLoading, setIsLoading] = useState(false)

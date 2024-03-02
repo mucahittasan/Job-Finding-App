@@ -5,7 +5,7 @@ import { containerVariants } from '@/utils/motions/Variant'
 const HomeContent = () => {
   return (
     <MotionSection
-      className="content text-center h-[calc(100vh-172px)] flex px-4 flex-col justify-center max-w-4xl mx-auto w-full"
+      className="content text-center h-[calc(100vh-174px)] flex px-4 flex-col justify-center max-w-4xl mx-auto w-full"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

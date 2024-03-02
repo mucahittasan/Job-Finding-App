@@ -1,6 +1,6 @@
 import HeaderContent from './HeaderContent'
 
-const Header = async () => {
+const Header = () => {
   return (
     <>
       <HeaderContent />

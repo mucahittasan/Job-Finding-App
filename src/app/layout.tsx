@@ -4,7 +4,7 @@ import './globals.css'
 
 import LoginModal from '@/components/ui/modals/LoginModal'
 import RegisterModal from '@/components/ui/modals/RegisterModal'
-import { QueryClient } from '@tanstack/react-query'
+import { Toaster } from 'react-hot-toast'
 import Providers from '../components/Providers'
 
 const poppins = Poppins({
@@ -26,14 +26,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const queryClient = new QueryClient()
-
   return (
     <html lang="en">
       <body
         className={`${poppins.className}  bg-gradient-to-br from-dark to-[rgb(12,1,17)] min-h-screen text-white relative`}
       >
         <Providers>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+          />
           <RegisterModal />
           <LoginModal />
           <main>{children}</main>
