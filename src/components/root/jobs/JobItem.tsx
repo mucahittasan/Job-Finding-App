@@ -86,9 +86,9 @@ const JobItem: FC<JobItemProps> = ({
         >
           Detail
         </Button>
-        <Button className="w-full !bg-white/20 text-white hover:!bg-white/30">
+        {/* <Button className="w-full !bg-white/20 text-white hover:!bg-white/30">
           Withdraw
-        </Button>
+        </Button> */}
       </div>
     </MotionDiv>
   )

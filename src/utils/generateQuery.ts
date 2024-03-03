@@ -6,6 +6,11 @@ export const GenerateQuery = (
     value?: string | Record<string, string>,
   ) => {
     const encodedKey = encodeURIComponent(key)
+
+    if (value === undefined || value === '') {
+      return ''
+    }
+
     if (typeof value === 'object') {
       const encodedValue = Object.entries(value)
         .map(
@@ -27,9 +32,6 @@ export const GenerateQuery = (
   const queryArray: string[] = []
 
   args.forEach((arg) => {
-    if (arg.key == undefined || arg.key.length == 0 || arg.value == undefined)
-      return
-
     const encodedQueryParam = encodeQueryParam(arg.key, arg.value)
     if (encodedQueryParam.length > 0) {
       queryArray.push(encodedQueryParam)

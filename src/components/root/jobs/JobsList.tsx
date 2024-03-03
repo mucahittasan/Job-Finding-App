@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
+import { GenerateQuery } from '@/utils/generateQuery'
 import { MotionDiv } from '@/utils/motions/Motions'
 import { jobListVariants } from '@/utils/motions/Variant'
 
@@ -13,7 +14,6 @@ import { getAllJobs } from '@/constants/urls'
 
 import useFilter from '@/hooks/useFilter'
 
-import { GenerateQuery } from '../../../utils/generateQuery'
 import Button from '../../ui/Button'
 import JobItem from './JobItem'
 import JobsPagination from './JobsPagination'
@@ -117,7 +117,7 @@ const JobsList = () => {
               location={job.location}
             />
           ))}
-          <JobsPagination />
+          {jobs?.meta?.total >= 10 && <JobsPagination />}
         </>
       )}
     </MotionDiv>

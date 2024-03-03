@@ -33,7 +33,6 @@ const JobsPagination = () => {
       setPageCount(pageCount + 1)
     }
   }
-
   if (!mounted) return null
   return (
     <div className="flex items-center justify-between bg-[rgb(133,133,133)]/10 min-h-[50px] rounded-md px-2 mt-4">
@@ -52,7 +51,9 @@ const JobsPagination = () => {
         </Button>
         <button className="text-white font-semibold flex gap-x-1">
           <span>{pageCount}</span>/
-          <span className="text-gray_color">{totalShowCount / showCount}</span>
+          <span className="text-gray_color">
+            {Math.round(totalShowCount / showCount)}
+          </span>
         </button>
         <Button
           onClick={() => handleNext()}
