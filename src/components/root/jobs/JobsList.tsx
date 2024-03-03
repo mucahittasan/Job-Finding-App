@@ -13,53 +13,46 @@ import { getAllJobs } from '@/constants/urls'
 
 import useFilter from '@/hooks/useFilter'
 
+import { GenerateQuery } from '../../../utils/generateQuery'
 import JobItem from './JobItem'
 
 const JobsList = () => {
-  const { orderByDirection, orderByField } = useFilter()
+  const { orderByDirection, orderByField, searchQuery } = useFilter()
 
   const fetchJobs = async () => {
-    if (
-      orderByDirection === '' ||
-      (orderByDirection === undefined && orderByField === '') ||
-      orderByField === undefined
-    ) {
-      const response = await fetch(
-        getAllJobs({
-          page: 1,
-          perPage: 10,
-        }),
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get('accessToken')}`,
-          },
-        },
-      )
-      if (!response.ok) {
-        throw new Error('Network error')
-      }
-
-      return response.json()
-    } else {
-      const response = await fetch(
-        getAllJobs({
-          page: 1,
-          perPage: 10,
-          orderByField: orderByDirection,
-          orderByDirection: orderByField,
-        }),
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get('accessToken')}`,
-          },
-        },
-      )
-      if (!response.ok) {
-        toast.error('Network error')
-      }
-
-      return response.json()
+    const baseQuery = {
+      page: 1,
+      perPage: 10,
+      orderByField: orderByDirection,
+      orderByDirection: orderByField,
     }
+
+    const searchQueryParams = searchQuery
+      ? [
+          {
+            key: 'search',
+            value: {
+              field: 'name',
+              query: searchQuery,
+            },
+          },
+        ]
+      : []
+
+    const response = await fetch(
+      `${getAllJobs(baseQuery)}&${GenerateQuery(...searchQueryParams)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('accessToken')}`,
+        },
+      },
+    )
+
+    if (!response.ok) {
+      toast.error('Network error')
+    }
+
+    return response.json()
   }
 
   const {
@@ -75,7 +68,7 @@ const JobsList = () => {
 
   useEffect(() => {
     refetch()
-  }, [orderByField, orderByDirection])
+  }, [orderByField, orderByDirection, searchQuery])
 
   if (isLoading) {
     return <div>Loading...</div>
