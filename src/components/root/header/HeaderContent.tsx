@@ -12,7 +12,6 @@ import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { User } from '../../../actions/user'
 import Popover from '../../ui/popover'
 
 const HeaderContent = () => {
@@ -22,22 +21,20 @@ const HeaderContent = () => {
   const pathname = usePathname()
   const router = useRouter()
 
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [popover, setPopover] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const handleLogout = () => {
     Cookies.remove('accessToken', { path: '/' })
-    setCurrentUser(null)
+    loginModal.setCurrentUser(null)
     setPopover(false)
     router.push('/')
   }
-
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
         const res = await axios.get('/api/user/')
-        setCurrentUser(res.data)
+        loginModal.setCurrentUser(res.data)
       } catch (error: any) {
         if (error.response?.status === 401) {
           loginModal.onOpen()
@@ -76,7 +73,7 @@ const HeaderContent = () => {
       <div className="flex gap-x-4">
         {loading ? (
           <p>Loading...</p>
-        ) : currentUser ? (
+        ) : loginModal.currentUser ? (
           <div className="relative">
             <Button
               onClick={() => setPopover((prev) => !prev)}
@@ -84,14 +81,15 @@ const HeaderContent = () => {
               className="font-semibold md:text-base text-xs md:h-10 h-8 bg-white/20 text-white hover:!bg-white/10"
             >
               <Image
-                src={currentUser?.profileImage ?? ''}
+                src={loginModal.currentUser?.profileImage ?? ''}
                 alt="Avatar"
                 width={30}
                 height={30}
                 className="rounded-full aspect-square object-cover"
               />
               <span className="text-white text-sm">
-                {currentUser?.email && currentUser.email.split('@')[0]}
+                {loginModal.currentUser?.email &&
+                  loginModal.currentUser.email.split('@')[0]}
               </span>{' '}
               <ChevronDown
                 className={`transition duration-300 ${

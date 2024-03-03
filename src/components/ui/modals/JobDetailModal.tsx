@@ -1,46 +1,72 @@
 'use client'
 
+import { applieJobUrl, getJobById } from '@/constants/urls'
 import useJobDetailModal from '@/hooks/modals/jobDetailModal'
-import { useQuery } from '@tanstack/react-query'
+import useCustomDateFormatter from '@/hooks/useFormatDate'
+import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import Modal from '.'
-import { getJobById } from '../../../constants/urls'
-import useCustomDateFormatter from '../../../hooks/useFormatDate'
 
 const JobDetailModal = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const { currentJob, isOpen, onClose } = useJobDetailModal()
 
-  const { currentJob, setCurrentJob, isOpen, onClose } = useJobDetailModal()
+  const [submitIsLoading, setSubmitIsLoading] = useState<boolean>(false)
 
-  const fetchJobById = async () => {
+  const handleSubmit = async () => {
     if (!currentJob) {
       throw new Error('Current job is null')
     }
-
-    const response = await axios.get(getJobById(currentJob), {
-      headers: {
-        Authorization: `Bearer ${Cookies.get('accessToken')}`,
-      },
-    })
-    return response.data
+    setSubmitIsLoading(true)
+    try {
+      const response = await axios.post(applieJobUrl(currentJob), currentJob, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('accessToken')}`,
+        },
+      })
+      toast.success(response.data.message)
+      onClose()
+      return response.data
+    } catch (error: any) {
+      toast.error(error.message)
+      setSubmitIsLoading(false)
+    } finally {
+      setSubmitIsLoading(false)
+      window.location.reload()
+    }
   }
 
-  const { data: job, refetch } = useQuery({
-    queryKey: ['jobDetail'],
-    queryFn: fetchJobById,
-    enabled: false,
+  const {
+    data: job,
+    mutate: refetch,
+    isPending,
+  } = useMutation({
+    mutationFn: async () => {
+      if (!currentJob) {
+        throw new Error('Current job is null')
+      }
+
+      const response = await axios.get(getJobById(currentJob), {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('accessToken')}`,
+        },
+      })
+      return response.data
+    },
   })
+
   useEffect(() => {
     refetch()
   }, [currentJob, isOpen])
 
   const formattedDate = useCustomDateFormatter(job?.createdAt) || ''
 
-  const handleSubmit = () => {}
-
-  const bodyContent = (
+  const bodyContent = isPending ? (
+    <Loader2 className="mx-auto h-8 w-8 animate-spin text-dark" />
+  ) : (
     <div className="text-dark pb-2 flex flex-col gap-y-2">
       <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
         <span className="font-bold text-lg text-primary_color">
@@ -108,8 +134,8 @@ const JobDetailModal = () => {
       isOpen={isOpen}
       title="Apply Job"
       body={bodyContent}
-      isLoading={isLoading}
       secondaryAction={onClose}
+      isLoading={submitIsLoading}
       secondaryActionLabel="Cancel"
     />
   )

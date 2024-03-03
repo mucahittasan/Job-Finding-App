@@ -3,7 +3,7 @@ import { User } from '../../actions/user'
 
 interface LoginModalStore {
   currentUser: User | null
-  setCurrentUser: (user: User) => void
+  setCurrentUser: (user: any) => void
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -11,7 +11,7 @@ interface LoginModalStore {
 
 const useLoginModal = create<LoginModalStore>((set) => ({
   currentUser: null,
-  setCurrentUser: (user: User) => set({ currentUser: user }),
+  setCurrentUser: (user: any) => set({ currentUser: user }),
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),

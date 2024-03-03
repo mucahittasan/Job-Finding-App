@@ -14,11 +14,16 @@ import { getAllJobs } from '@/constants/urls'
 
 import useFilter from '@/hooks/useFilter'
 
+import useJobDetailModal from '@/hooks/modals/jobDetailModal'
+import useLoginModal from '@/hooks/modals/useLoginModal'
 import Button from '../../ui/Button'
 import JobItem from './JobItem'
 import JobsPagination from './JobsPagination'
 
 const JobsList = () => {
+  const { currentUser } = useLoginModal()
+  const jobDetailModal = useJobDetailModal()
+
   const {
     orderByDirection,
     orderByField,
@@ -80,6 +85,7 @@ const JobsList = () => {
   useEffect(() => {
     setTotalShowCount(jobs?.meta?.total)
   }, [jobs])
+  console.log(jobs?.data?.map((item: Job) => item.id))
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -115,6 +121,9 @@ const JobsList = () => {
               description={job.description}
               salary={job.salary}
               location={job.location}
+              isApplied={
+                currentUser?.appliedJobs?.includes(job.id as never) || false
+              }
             />
           ))}
           {jobs?.meta?.total >= 10 && <JobsPagination />}

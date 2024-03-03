@@ -28,10 +28,8 @@ export async function registerUser(userData: {
 export async function loginUser(userData: { email: string; password: string }) {
   try {
     const response = await axios.post(loginUrl(), userData, { headers })
-    console.log(response.data)
     return response.data
   } catch (error: any) {
-    console.error('Error during login:', error.response?.data || error.message)
     throw error.response?.data || error.message
   }
 }

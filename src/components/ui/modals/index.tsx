@@ -96,7 +96,6 @@ const Modal: React.FC<ModalProps> = ({
               <div className="flex flex-row items-center gap-4 w-full">
                 {secondaryAction && secondaryActionLabel && (
                   <Button
-                    isLoading={isLoading}
                     onClick={handleSecondaryAction}
                     className="w-full rounded-[20px] !text-sm !text-dark border border-dark hover:!bg-dark/5"
                   >

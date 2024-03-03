@@ -37,3 +37,7 @@ export const getAllJobs = (props: {
 
   return `${BASE_API_ADDRESS}/jobs?${query}`
 }
+
+export const applieJobUrl = (id: string) => {
+  return `${BASE_API_ADDRESS}/jobs/${id}/apply`
+}
