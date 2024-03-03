@@ -6,6 +6,8 @@ interface FilterStore {
   searchQuery?: string
   showCount: number
   pageCount: number
+  totalShowCount: number
+  setTotalShowCount: (total: number) => void
   setPageCount: (count: number) => void
   setShowCount: (count: number) => void
   setFieldAndDirection: (field: string, direction: string) => void
@@ -18,6 +20,8 @@ const useFilter = create<FilterStore>((set) => ({
   searchQuery: undefined,
   showCount: 10,
   pageCount: 1,
+  totalShowCount: 100,
+  setTotalShowCount: (total: number) => set({ totalShowCount: total }),
   setPageCount: (count: number) => set({ pageCount: count }),
   setShowCount: (count: number) => set({ showCount: count }),
   setFieldAndDirection: (field: string | '', direction: string | '') =>

@@ -11,9 +11,10 @@ import useFilter from '@/hooks/useFilter'
 const JobsPagination = () => {
   const [openShowCount, setOpenShowCount] = useState<boolean>(false)
   const [mounted, setMounted] = useState(false)
-  const showCounts = [10, 20, 30]
 
-  const { setShowCount, showCount, pageCount, setPageCount } = useFilter()
+  const { setShowCount, showCount, pageCount, setPageCount, totalShowCount } =
+    useFilter()
+  const showCounts = [5, 10, 20, 25]
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -28,13 +29,12 @@ const JobsPagination = () => {
   }
 
   const handleNext = () => {
-    if (pageCount !== showCount) {
+    if (pageCount !== totalShowCount / showCount) {
       setPageCount(pageCount + 1)
     }
   }
 
   if (!mounted) return null
-
   return (
     <div className="flex items-center justify-between bg-[rgb(133,133,133)]/10 min-h-[50px] rounded-md px-2 mt-4">
       <div></div>
@@ -43,7 +43,7 @@ const JobsPagination = () => {
           onClick={() => handlePrev()}
           className={`h-[25px] ${
             pageCount === 1
-              ? 'bg-gray_color/20 text-gray_color hover:bg-gray_color/20'
+              ? '!bg-gray_color/20 text-gray_color hover:!bg-gray_color/20'
               : ''
           }`}
           disabled={pageCount === 1}
@@ -52,13 +52,13 @@ const JobsPagination = () => {
         </Button>
         <button className="text-white font-semibold flex gap-x-1">
           <span>{pageCount}</span>/
-          <span className="text-gray_color">{showCount}</span>
+          <span className="text-gray_color">{totalShowCount / showCount}</span>
         </button>
         <Button
           onClick={() => handleNext()}
           className={`h-[25px] ${
-            showCount === pageCount
-              ? 'bg-gray_color/20 text-gray_color hover:bg-gray_color/20'
+            totalShowCount / showCount === pageCount
+              ? '!bg-gray_color/20 text-gray_color hover:!bg-gray_color/20'
               : ''
           }`}
           disabled={showCount === pageCount}

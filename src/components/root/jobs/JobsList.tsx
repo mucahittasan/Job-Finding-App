@@ -14,12 +14,19 @@ import { getAllJobs } from '@/constants/urls'
 import useFilter from '@/hooks/useFilter'
 
 import { GenerateQuery } from '../../../utils/generateQuery'
+import Button from '../../ui/Button'
 import JobItem from './JobItem'
 import JobsPagination from './JobsPagination'
 
 const JobsList = () => {
-  const { orderByDirection, orderByField, searchQuery, showCount, pageCount } =
-    useFilter()
+  const {
+    orderByDirection,
+    orderByField,
+    searchQuery,
+    showCount,
+    pageCount,
+    setTotalShowCount,
+  } = useFilter()
 
   const fetchJobs = async () => {
     const baseQuery = {
@@ -49,7 +56,6 @@ const JobsList = () => {
         },
       },
     )
-
     if (!response.ok) {
       toast.error('Network error')
     }
@@ -67,11 +73,14 @@ const JobsList = () => {
     queryFn: fetchJobs,
     enabled: false,
   })
-
   useEffect(() => {
     refetch()
   }, [orderByField, orderByDirection, searchQuery, showCount, pageCount])
-  console.log(jobs?.data?.length)
+
+  useEffect(() => {
+    setTotalShowCount(jobs?.meta?.total)
+  }, [jobs])
+
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -85,10 +94,15 @@ const JobsList = () => {
       variants={jobListVariants}
       initial="hidden"
       animate="visible"
-      className="max-h-[calc(100vh-230px)] h-full overflow-y-auto px-12 py-6 flex flex-col "
+      className="max-h-[calc(100vh-173px)] h-full overflow-y-auto px-12 py-6 flex flex-col "
     >
       {jobs?.data?.length === 0 ? (
-        <div>There is no any data!</div>
+        <div className="flex gap-x-4 items-center">
+          <span>There is no any data!</span>
+          <Button onClick={() => window.location.reload()}>
+            Refresh the page
+          </Button>
+        </div>
       ) : (
         <>
           {jobs?.data?.map((job: Job, i: number) => (
