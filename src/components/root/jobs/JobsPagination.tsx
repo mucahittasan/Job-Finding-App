@@ -29,7 +29,7 @@ const JobsPagination = () => {
   }
 
   const handleNext = () => {
-    if (pageCount !== totalShowCount / showCount) {
+    if (pageCount !== Math.round(totalShowCount / showCount)) {
       setPageCount(pageCount + 1)
     }
   }
@@ -58,7 +58,7 @@ const JobsPagination = () => {
         <Button
           onClick={() => handleNext()}
           className={`h-[25px] ${
-            totalShowCount / showCount === pageCount
+            Math.round(totalShowCount / showCount) === pageCount
               ? '!bg-gray_color/20 text-gray_color hover:!bg-gray_color/20'
               : ''
           }`}
