@@ -47,9 +47,8 @@ const LoginModal = () => {
         email: data.email,
         password: data.password,
       })
-      console.log(response)
       if (response.accessToken) {
-        Cookies.set('accessToken', response.accessToken, { expires: 7 })
+        Cookies.set('accessToken', response.accessToken)
         return response
       }
     },

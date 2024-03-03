@@ -14,8 +14,12 @@ const Popover: React.FC<PopoverInterface> = ({
   return (
     <div
       className={`
-            transition duration-200 absolute top-[calc(100%+10px)] right-0  rounded-lg bg-white  text-dark flex flex-col items-start w-full z-50
-            ${isOpen ? 'opacity-[1] translate-y-0' : 'translate-y-2 opacity-0'}
+            transition duration-200 absolute top-[calc(100%+10px)] right-0  rounded-lg bg-white  text-dark flex flex-col items-start w-full 
+            ${
+              isOpen
+                ? 'opacity-[1] translate-y-0 z-50 '
+                : 'translate-y-2 opacity-0 -z-50'
+            }
             ${className}
         `}
     >

@@ -1,11 +1,12 @@
 export interface Job {
+  id: string
   name: string
   companyName: string
   keywords: string[]
   description: string
   salary: number
   location: string
-  createdAt?: string
+  createdAt: string
 }
 
 export const jobs = [

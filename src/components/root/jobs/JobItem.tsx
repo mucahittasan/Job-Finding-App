@@ -8,23 +8,23 @@ import { Briefcase } from 'lucide-react'
 import { FC } from 'react'
 
 interface JobItemProps {
+  id: string
   jobName: string
   companyName: string
   keywords: string[]
   description: string
   salary: number
   location: string
-  createdAt: string
 }
 
 const JobItem: FC<JobItemProps> = ({
+  id,
   jobName,
   companyName,
   keywords,
   description,
   salary,
   location,
-  createdAt,
 }) => {
   const jobDetailModal = useJobDetailModal()
 
@@ -77,15 +77,7 @@ const JobItem: FC<JobItemProps> = ({
         <Button
           className="w-full"
           onClick={() => {
-            jobDetailModal.setCurrentJob({
-              name: jobName,
-              companyName,
-              keywords,
-              description,
-              salary,
-              location,
-              createdAt,
-            })
+            jobDetailModal.setCurrentJob(id)
             jobDetailModal.onOpen()
           }}
         >

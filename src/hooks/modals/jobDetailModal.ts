@@ -1,9 +1,8 @@
-import { Job } from '@/constants/JobList'
 import { create } from 'zustand'
 
 interface JobDetailModalStore {
-  currentJob: Job | null
-  setCurrentJob: (job: Job) => void
+  currentJob: string | null
+  setCurrentJob: (job: string) => void
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -11,7 +10,7 @@ interface JobDetailModalStore {
 
 const useJobDetailModal = create<JobDetailModalStore>((set) => ({
   currentJob: null,
-  setCurrentJob: (job: Job) => set({ currentJob: job }),
+  setCurrentJob: (job: string) => set({ currentJob: job }),
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),

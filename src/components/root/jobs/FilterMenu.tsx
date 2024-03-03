@@ -1,20 +1,29 @@
 'use client'
 
+import Button from '@/components/ui/Button'
+import { buttons } from '@/constants/FilterButtons'
+import useFilter from '@/hooks/useFilter'
 import { ChevronDown, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { buttons } from '../../../constants/FilterButtons'
-import Button from '../../ui/Button'
 
 const FilterMenu = () => {
   const [open, setOpen] = useState<boolean>(false)
   const [activeFilter, setActiveFilter] = useState<string>('')
   const menuRef = useRef<HTMLDivElement>(null)
 
-  const handleClick = (text: string) => {
-    if (text === activeFilter) {
+  const { setFieldAndDirection } = useFilter()
+
+  const handleClick = (button: {
+    text: string
+    orderByField: string
+    orderByDirection: string
+  }) => {
+    if (button.text === activeFilter) {
       setActiveFilter('')
+      setFieldAndDirection('', '')
     } else {
-      setActiveFilter(text)
+      setActiveFilter(button.text)
+      setFieldAndDirection(button.orderByDirection, button.orderByField)
     }
   }
 
@@ -74,7 +83,7 @@ const FilterMenu = () => {
                   ? 'bg-primary_color text-white'
                   : 'bg-transparent text-dark  hover:text-primary_color'
               }  w-full text-left p-1.5 text-sm font-medium  rounded-md transition-all duration-200`}
-              onClick={() => handleClick(button.text)}
+              onClick={() => handleClick(button)}
             >
               {button.text}
             </button>
