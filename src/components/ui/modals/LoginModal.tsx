@@ -41,7 +41,7 @@ const LoginModal = () => {
     return errors[fieldName]?.message
   }
 
-  const { mutate: loginMutate } = useMutation({
+  const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: async (data: { email: string; password: string }) => {
       const response = await loginUser({
         email: data.email,
@@ -67,22 +67,12 @@ const LoginModal = () => {
       }
     },
   })
-
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data)
-    setIsLoading(true)
-
-    try {
-      loginMutate({
-        email: data.email as string,
-        password: data.password as string,
-      })
-    } catch (error) {
-      console.error('Error during login:', error)
-    } finally {
-      setIsLoading(false)
-      reset()
-    }
+    loginMutate({
+      email: data.email as string,
+      password: data.password as string,
+    })
+    reset()
   }
 
   const bodyContent = (
@@ -138,7 +128,7 @@ const LoginModal = () => {
       title="Welcome Back!"
       body={bodyContent}
       footer={footerContent}
-      isLoading={isLoading}
+      isLoading={isPending}
     />
   )
 }

@@ -18,11 +18,12 @@ import JobItem from './JobItem'
 import JobsPagination from './JobsPagination'
 
 const JobsList = () => {
-  const { orderByDirection, orderByField, searchQuery, showCount } = useFilter()
+  const { orderByDirection, orderByField, searchQuery, showCount, pageCount } =
+    useFilter()
 
   const fetchJobs = async () => {
     const baseQuery = {
-      page: 1,
+      page: pageCount,
       perPage: showCount,
       orderByField: orderByDirection,
       orderByDirection: orderByField,
@@ -69,18 +70,14 @@ const JobsList = () => {
 
   useEffect(() => {
     refetch()
-  }, [orderByField, orderByDirection, searchQuery, showCount])
-
+  }, [orderByField, orderByDirection, searchQuery, showCount, pageCount])
+  console.log(jobs?.data?.length)
   if (isLoading) {
     return <div>Loading...</div>
   }
 
   if (error) {
     return <div>Error: {error.message}</div>
-  }
-
-  if (jobs?.data?.length === 0) {
-    return <div>There is no any data!</div>
   }
 
   return (
@@ -90,21 +87,26 @@ const JobsList = () => {
       animate="visible"
       className="max-h-[calc(100vh-230px)] h-full overflow-y-auto px-12 py-6 flex flex-col "
     >
-      {jobs?.data?.map((job: Job, i: number) => (
-        <JobItem
-          key={i}
-          id={job.id}
-          jobName={job.name}
-          companyName={job.companyName}
-          keywords={job.keywords}
-          description={job.description}
-          salary={job.salary}
-          location={job.location}
-        />
-      ))}
-      <JobsPagination />
+      {jobs?.data?.length === 0 ? (
+        <div>There is no any data!</div>
+      ) : (
+        <>
+          {jobs?.data?.map((job: Job, i: number) => (
+            <JobItem
+              key={i}
+              id={job.id}
+              jobName={job.name}
+              companyName={job.companyName}
+              keywords={job.keywords}
+              description={job.description}
+              salary={job.salary}
+              location={job.location}
+            />
+          ))}
+          <JobsPagination />
+        </>
+      )}
     </MotionDiv>
   )
 }
-
 export default JobsList

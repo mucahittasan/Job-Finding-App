@@ -11,9 +11,9 @@ import useFilter from '@/hooks/useFilter'
 const JobsPagination = () => {
   const [openShowCount, setOpenShowCount] = useState<boolean>(false)
   const [mounted, setMounted] = useState(false)
-  const showCounts = [10, 20, 30, 40]
+  const showCounts = [10, 20, 30]
 
-  const { setShowCount, showCount } = useFilter()
+  const { setShowCount, showCount, pageCount, setPageCount } = useFilter()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -21,17 +21,50 @@ const JobsPagination = () => {
     }
   }, [])
 
+  const handlePrev = () => {
+    if (pageCount !== 1) {
+      setPageCount(pageCount - 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (pageCount !== showCount) {
+      setPageCount(pageCount + 1)
+    }
+  }
+
   if (!mounted) return null
 
   return (
     <div className="flex items-center justify-between bg-[rgb(133,133,133)]/10 min-h-[50px] rounded-md px-2 mt-4">
       <div></div>
       <div className="flex items-center gap-x-4">
-        <Button className="h-[25px]">Prev</Button>
+        <Button
+          onClick={() => handlePrev()}
+          className={`h-[25px] ${
+            pageCount === 1
+              ? 'bg-gray_color/20 text-gray_color hover:bg-gray_color/20'
+              : ''
+          }`}
+          disabled={pageCount === 1}
+        >
+          Prev
+        </Button>
         <button className="text-white font-semibold flex gap-x-1">
-          <span>1</span>/<span className="text-gray_color">10</span>
+          <span>{pageCount}</span>/
+          <span className="text-gray_color">{showCount}</span>
         </button>
-        <Button className="h-[25px]">Next</Button>
+        <Button
+          onClick={() => handleNext()}
+          className={`h-[25px] ${
+            showCount === pageCount
+              ? 'bg-gray_color/20 text-gray_color hover:bg-gray_color/20'
+              : ''
+          }`}
+          disabled={showCount === pageCount}
+        >
+          Next
+        </Button>
       </div>
       <div className="flex gap-x-2 items-center">
         <span className="font-semibold text-sm">Show</span>

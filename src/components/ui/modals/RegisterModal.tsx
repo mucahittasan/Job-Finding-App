@@ -40,7 +40,7 @@ const RegisterModal = () => {
     return errors[fieldName]?.message
   }
 
-  const { mutate: registerMutate } = useMutation({
+  const { mutate: registerMutate, isPending } = useMutation({
     mutationFn: async (data: { email: string; password: string }) => {
       const response = await registerUser({
         email: data.email,
@@ -63,19 +63,11 @@ const RegisterModal = () => {
   })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true)
-
-    try {
-      registerMutate({
-        email: data.email as string,
-        password: data.password as string,
-      })
-    } catch (error) {
-      console.error('Error during registration:', error)
-    } finally {
-      setIsLoading(false)
-      reset()
-    }
+    registerMutate({
+      email: data.email as string,
+      password: data.password as string,
+    })
+    reset()
   }
 
   const bodyContent = (
@@ -131,7 +123,7 @@ const RegisterModal = () => {
       title="Become a member!"
       body={bodyContent}
       footer={footerContent}
-      isLoading={isLoading}
+      isLoading={isPending}
     />
   )
 }

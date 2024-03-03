@@ -1,7 +1,7 @@
 import { Loader2 } from 'lucide-react'
 import { ReactNode } from 'react'
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   variant?: 'primary' | 'secondary'
   onClick?: () => void
@@ -17,9 +17,11 @@ const Button: React.FC<Props> = ({
   size = 'default',
   className,
   isLoading,
+  ...props
 }) => {
   return (
     <button
+      {...props}
       onClick={onClick}
       className={`
       inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition gap-x-2
