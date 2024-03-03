@@ -42,7 +42,10 @@ const JobItem: FC<JobItemProps> = ({
       className="flex justify-between border-b border-b-gray_color/50 py-4"
     >
       <div className="flex gap-4">
-        <Briefcase size={50} />
+        <Briefcase
+          size={50}
+          className="min-w-[50px]"
+        />
         <div className="flex flex-col items-start gap-y-4 ">
           <div className="flex items-center gap-x-2 text-2xl font-bold">
             <h3>{companyName}</h3>

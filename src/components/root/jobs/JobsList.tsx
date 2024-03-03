@@ -15,14 +15,15 @@ import useFilter from '@/hooks/useFilter'
 
 import { GenerateQuery } from '../../../utils/generateQuery'
 import JobItem from './JobItem'
+import JobsPagination from './JobsPagination'
 
 const JobsList = () => {
-  const { orderByDirection, orderByField, searchQuery } = useFilter()
+  const { orderByDirection, orderByField, searchQuery, showCount } = useFilter()
 
   const fetchJobs = async () => {
     const baseQuery = {
       page: 1,
-      perPage: 10,
+      perPage: showCount,
       orderByField: orderByDirection,
       orderByDirection: orderByField,
     }
@@ -68,7 +69,7 @@ const JobsList = () => {
 
   useEffect(() => {
     refetch()
-  }, [orderByField, orderByDirection, searchQuery])
+  }, [orderByField, orderByDirection, searchQuery, showCount])
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -78,14 +79,18 @@ const JobsList = () => {
     return <div>Error: {error.message}</div>
   }
 
+  if (jobs?.data?.length === 0) {
+    return <div>There is no any data!</div>
+  }
+
   return (
     <MotionDiv
       variants={jobListVariants}
       initial="hidden"
       animate="visible"
-      className="max-h-[calc(100vh-185px)] h-full overflow-y-auto px-12 py-6 flex flex-col "
+      className="max-h-[calc(100vh-230px)] h-full overflow-y-auto px-12 py-6 flex flex-col "
     >
-      {jobs?.data.map((job: Job, i: number) => (
+      {jobs?.data?.map((job: Job, i: number) => (
         <JobItem
           key={i}
           id={job.id}
@@ -97,6 +102,7 @@ const JobsList = () => {
           location={job.location}
         />
       ))}
+      <JobsPagination />
     </MotionDiv>
   )
 }
