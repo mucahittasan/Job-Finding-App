@@ -7,13 +7,14 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import Modal from '.'
 
 const JobDetailModal = () => {
   const { currentJob, isOpen, onClose } = useJobDetailModal()
-
+  const router = useRouter()
   const [submitIsLoading, setSubmitIsLoading] = useState<boolean>(false)
 
   const handleSubmit = async () => {
@@ -98,7 +99,7 @@ const JobDetailModal = () => {
       </div>
       <div className="flex flex-col gap-y-2">
         <span className="font-bold text-lg text-primary_color">Keywords: </span>
-        <div className="flex gap-x-2 flex-wrap mb-2">
+        <div className="flex gap-2 flex-wrap mb-2">
           {job?.keywords.map((keyword: string, i: number) => (
             <div
               key={i}

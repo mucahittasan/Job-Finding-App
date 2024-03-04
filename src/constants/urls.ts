@@ -41,3 +41,7 @@ export const getAllJobs = (props: {
 export const applieJobUrl = (id: string) => {
   return `${BASE_API_ADDRESS}/jobs/${id}/apply`
 }
+
+export const withdrawJoburl = (id: string) => {
+  return `${BASE_API_ADDRESS}/jobs/${id}/withdraw`
+}

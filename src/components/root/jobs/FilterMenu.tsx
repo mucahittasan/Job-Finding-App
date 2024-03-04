@@ -50,7 +50,7 @@ const FilterMenu = () => {
         onClick={() => setOpen((prev) => !prev)}
         className="bg-gradient-to-tr from-primary_color to-secondary_color hover:from-primary_color/80 hover:to-secondary_color/90 text-white font-semibold active:scale-[.97] "
       >
-        <span>Selected Field</span>
+        <span>Select a Field</span>
         <ChevronDown
           size={20}
           className={`transition duration-200 ${

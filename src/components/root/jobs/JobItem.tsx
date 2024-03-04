@@ -4,9 +4,12 @@ import Button from '@/components/ui/Button'
 import useJobDetailModal from '@/hooks/modals/jobDetailModal'
 import { MotionDiv } from '@/utils/motions/Motions'
 import { jobItemVariants } from '@/utils/motions/Variant'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 import { Briefcase } from 'lucide-react'
-import { FC } from 'react'
-
+import { FC, useState } from 'react'
+import toast from 'react-hot-toast'
+import { withdrawJoburl } from '../../../constants/urls'
 interface JobItemProps {
   id: string
   jobName: string
@@ -30,13 +33,32 @@ const JobItem: FC<JobItemProps> = ({
 }) => {
   const jobDetailModal = useJobDetailModal()
 
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const firstThreeKeywords = () => {
     return keywords.length > 0 ? keywords.slice(0, 3) : []
   }
 
   const firstThree = firstThreeKeywords()
 
-  const handleWithDraw = async () => {}
+  const handleWithDraw = async () => {
+    setIsLoading(true)
+    try {
+      const response = await axios.post(withdrawJoburl(id), id, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('accessToken')}`,
+        },
+      })
+      toast.success(response.data.message)
+      return response.data
+    } catch (error: any) {
+      toast.error(error.message)
+      setIsLoading(false)
+    } finally {
+      setIsLoading(false)
+      window.location.reload()
+    }
+  }
 
   return (
     <MotionDiv
@@ -94,6 +116,7 @@ const JobItem: FC<JobItemProps> = ({
         ) : (
           <Button
             onClick={() => handleWithDraw()}
+            isLoading={isLoading}
             className="w-full !bg-white/20 text-white hover:!bg-white/30"
           >
             Withdraw

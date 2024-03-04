@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import Header from '@/components/root/header/Header'
-import AppliedJobSidebar from '@/components/root/jobs/AppliedJobSidebar'
+import AppliedJobSidebar from '@/components/root/jobs/sidebar/AppliedJobSidebar'
 import JobDetailModal from '@/components/ui/modals/JobDetailModal'
 
 export const metadata: Metadata = {
