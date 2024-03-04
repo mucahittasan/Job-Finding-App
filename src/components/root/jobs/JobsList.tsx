@@ -12,6 +12,7 @@ import { Job } from '@/constants/JobList'
 import useFilter from '@/hooks/useFilter'
 
 import useLoginModal from '@/hooks/modals/useLoginModal'
+import { Loader2 } from 'lucide-react'
 import { fetchJobs } from '../../../actions/jobs'
 import Button from '../../ui/Button'
 import JobItem from './JobItem'
@@ -66,7 +67,11 @@ const JobsList = () => {
   }, [jobs])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return (
+      <div className="h-[calc(100vh-173px)]  flex justify-center items-center">
+        <Loader2 className="mr-2 h-8 w-8 animate-spin" />
+      </div>
+    )
   }
 
   if (error) {

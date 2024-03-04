@@ -46,11 +46,18 @@ export const refreshAccessToken = async (refreshToken: string) => {
   }
 }
 
-export const fetchCurrentUser = async () => {
-  try {
-    const res = await axios.get('/api/user/')
-    return res.data
-  } catch (error: any) {
-    throw Error(error.response?.data || error.message)
+export const fetchCurrentUser = async (accessToken?: string) => {
+  console.log(accessToken)
+  if (accessToken) {
+    try {
+      const res = await axios.get('/api/user/', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      return res.data
+    } catch (error: any) {
+      throw Error(error.response?.data || error.message)
+    }
   }
 }

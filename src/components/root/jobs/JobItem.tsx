@@ -54,7 +54,7 @@ const JobItem: FC<JobItemProps> = ({
       })
       toast.success(response.data.message)
 
-      fetchCurrentUser().then((data) => {
+      await fetchCurrentUser(Cookies.get('accessToken')).then((data) => {
         loginModal.setCurrentUser(data)
       })
 

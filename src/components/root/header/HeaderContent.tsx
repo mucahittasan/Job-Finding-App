@@ -7,10 +7,11 @@ import Button from '@/components/ui/Button'
 import useLoginModal from '@/hooks/modals/useLoginModal'
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
 import Cookies from 'js-cookie'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { fetchCurrentUser } from '../../../actions/user'
 import Popover from '../../ui/popover'
 
@@ -31,10 +32,20 @@ const HeaderContent = () => {
     router.push('/')
   }
   useEffect(() => {
-    fetchCurrentUser().then((data) => {
-      loginModal.setCurrentUser(data)
-      setLoading(false)
-    })
+    const getCurrentUser = async () => {
+      setLoading(true)
+      try {
+        await fetchCurrentUser(Cookies.get('accessToken')).then((data) => {
+          loginModal.setCurrentUser(data)
+          setLoading(false)
+        })
+      } catch (error: any) {
+        toast.error(error.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    getCurrentUser()
   }, [])
 
   useEffect(() => {
@@ -57,7 +68,7 @@ const HeaderContent = () => {
       </Link>
       <div className="flex gap-x-4">
         {loading ? (
-          <p>Loading...</p>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         ) : loginModal.currentUser ? (
           <div className="relative">
             <Button

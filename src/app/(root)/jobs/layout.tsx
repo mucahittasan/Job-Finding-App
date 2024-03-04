@@ -16,7 +16,7 @@ export default function Layout({
   children: React.ReactNode
 }>) {
   return (
-    <div className="flex gap-x-8">
+    <div className="flex gap-x-4">
       <div className="flex-[2.8]">
         <Header />
         <JobDetailModal />
