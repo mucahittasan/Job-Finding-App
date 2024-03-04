@@ -9,7 +9,9 @@ import Cookies from 'js-cookie'
 import { Briefcase } from 'lucide-react'
 import { FC, useState } from 'react'
 import toast from 'react-hot-toast'
+import { fetchCurrentUser } from '../../../actions/user'
 import { withdrawJoburl } from '../../../constants/urls'
+import useLoginModal from '../../../hooks/modals/useLoginModal'
 interface JobItemProps {
   id: string
   jobName: string
@@ -32,6 +34,7 @@ const JobItem: FC<JobItemProps> = ({
   isApplied,
 }) => {
   const jobDetailModal = useJobDetailModal()
+  const loginModal = useLoginModal()
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -50,13 +53,17 @@ const JobItem: FC<JobItemProps> = ({
         },
       })
       toast.success(response.data.message)
+
+      fetchCurrentUser().then((data) => {
+        loginModal.setCurrentUser(data)
+      })
+
       return response.data
     } catch (error: any) {
       toast.error(error.message)
       setIsLoading(false)
     } finally {
       setIsLoading(false)
-      window.location.reload()
     }
   }
 

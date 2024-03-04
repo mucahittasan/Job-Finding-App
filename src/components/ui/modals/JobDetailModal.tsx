@@ -7,14 +7,16 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import Modal from '.'
+import { fetchCurrentUser } from '../../../actions/user'
+import useLoginModal from '../../../hooks/modals/useLoginModal'
 
 const JobDetailModal = () => {
   const { currentJob, isOpen, onClose } = useJobDetailModal()
-  const router = useRouter()
+  const loginModal = useLoginModal()
+
   const [submitIsLoading, setSubmitIsLoading] = useState<boolean>(false)
 
   const handleSubmit = async () => {
@@ -28,6 +30,11 @@ const JobDetailModal = () => {
           Authorization: `Bearer ${Cookies.get('accessToken')}`,
         },
       })
+
+      fetchCurrentUser().then((data) => {
+        loginModal.setCurrentUser(data)
+      })
+
       toast.success(response.data.message)
       onClose()
       return response.data
@@ -36,7 +43,6 @@ const JobDetailModal = () => {
       setSubmitIsLoading(false)
     } finally {
       setSubmitIsLoading(false)
-      window.location.reload()
     }
   }
 

@@ -3,18 +3,16 @@
 import { useQuery } from '@tanstack/react-query'
 import Cookies from 'js-cookie'
 import { useEffect } from 'react'
-import toast from 'react-hot-toast'
 
-import { GenerateQuery } from '@/utils/generateQuery'
 import { MotionDiv } from '@/utils/motions/Motions'
 import { jobListVariants } from '@/utils/motions/Variant'
 
 import { Job } from '@/constants/JobList'
-import { getAllJobs } from '@/constants/urls'
 
 import useFilter from '@/hooks/useFilter'
 
 import useLoginModal from '@/hooks/modals/useLoginModal'
+import { fetchJobs } from '../../../actions/jobs'
 import Button from '../../ui/Button'
 import JobItem from './JobItem'
 import JobsPagination from './JobsPagination'
@@ -31,39 +29,15 @@ const JobsList = () => {
     setTotalShowCount,
   } = useFilter()
 
-  const fetchJobs = async () => {
-    const baseQuery = {
-      page: pageCount,
-      perPage: showCount,
-      orderByField: orderByDirection,
-      orderByDirection: orderByField,
-    }
-
-    const searchQueryParams = searchQuery
-      ? [
-          {
-            key: 'search',
-            value: {
-              field: 'name',
-              query: searchQuery,
-            },
-          },
-        ]
-      : []
-
-    const response = await fetch(
-      `${getAllJobs(baseQuery)}&${GenerateQuery(...searchQueryParams)}`,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('accessToken')}`,
-        },
-      },
+  const getJobs = async () => {
+    return await fetchJobs(
+      pageCount,
+      showCount,
+      orderByDirection,
+      orderByField,
+      searchQuery,
+      Cookies.get('accessToken'),
     )
-    if (!response.ok) {
-      toast.error('Network error')
-    }
-
-    return response.json()
   }
 
   const {
@@ -73,15 +47,22 @@ const JobsList = () => {
     refetch,
   } = useQuery({
     queryKey: ['jobs'],
-    queryFn: fetchJobs,
+    queryFn: getJobs,
     enabled: false,
   })
   useEffect(() => {
     refetch()
-  }, [orderByField, orderByDirection, searchQuery, showCount, pageCount])
+  }, [
+    orderByField,
+    orderByDirection,
+    searchQuery,
+    showCount,
+    pageCount,
+    currentUser,
+  ])
 
   useEffect(() => {
-    setTotalShowCount(jobs?.meta?.total)
+    setTotalShowCount(jobs?.meta?.total || 0)
   }, [jobs])
 
   if (isLoading) {

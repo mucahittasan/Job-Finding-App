@@ -5,8 +5,6 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 import { RegisterSchema } from '@/schemas'
 import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import Input from '../Input'
 import Modal from './index'
 
@@ -20,9 +18,6 @@ import { loginUser } from '../../../actions/user'
 const LoginModal = () => {
   const loginModal = useLoginModal()
   const registerModal = useRegisterModal()
-
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const {
     register,

@@ -51,6 +51,6 @@ export const fetchCurrentUser = async () => {
     const res = await axios.get('/api/user/')
     return res.data
   } catch (error: any) {
-    throw error.response?.data || error.message
+    throw Error(error.response?.data || error.message)
   }
 }

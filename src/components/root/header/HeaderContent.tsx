@@ -6,12 +6,12 @@ import Button from '@/components/ui/Button'
 
 import useLoginModal from '@/hooks/modals/useLoginModal'
 import useRegisterModal from '@/hooks/modals/useRegisterModal'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 import { ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { fetchCurrentUser } from '../../../actions/user'
 import Popover from '../../ui/popover'
 
 const HeaderContent = () => {
@@ -31,25 +31,10 @@ const HeaderContent = () => {
     router.push('/')
   }
   useEffect(() => {
-    const fetchCurrentUser = async () => {
-      try {
-        const res = await axios.get('/api/user/')
-        loginModal.setCurrentUser(res.data)
-      } catch (error: any) {
-        if (error.response?.status === 401) {
-          loginModal.onOpen()
-        } else {
-          console.error(
-            'Error during fetching current user:',
-            error.response?.data || error.message,
-          )
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchCurrentUser()
+    fetchCurrentUser().then((data) => {
+      loginModal.setCurrentUser(data)
+      setLoading(false)
+    })
   }, [])
 
   useEffect(() => {
