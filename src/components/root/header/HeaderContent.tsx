@@ -74,7 +74,7 @@ const HeaderContent = () => {
             <Button
               onClick={() => setPopover((prev) => !prev)}
               variant={'primary'}
-              className="font-semibold md:text-base text-xs md:h-10 h-8 bg-white/20 text-white hover:!bg-white/10"
+              className="font-semibold md:text-base text-xs bg-white/20 text-white hover:!bg-white/10"
             >
               <Image
                 src={loginModal.currentUser?.profileImage ?? ''}

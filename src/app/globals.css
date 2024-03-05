@@ -4,6 +4,10 @@
 
 @layer base {
 
+  body {
+    overflow-x: hidden;
+  }
+
     .content {
         @apply max-w-[1100px] mx-auto w-full
       }

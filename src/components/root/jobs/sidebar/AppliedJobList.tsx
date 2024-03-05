@@ -3,6 +3,7 @@
 import { Job } from '@/constants/JobList'
 import { getJobById } from '@/constants/urls'
 import useLoginModal from '@/hooks/modals/useLoginModal'
+import useSidebarToggle from '@/hooks/useSidebarToggle'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
@@ -11,6 +12,7 @@ import AppliedJobCard from './AppliedJobCard'
 
 const AppliedJobList = () => {
   const { currentUser } = useLoginModal()
+  const { isOpen } = useSidebarToggle()
 
   const [appliedJobsDetails, setAppliedJobsDetails] = useState<Job[]>([])
 
@@ -41,7 +43,11 @@ const AppliedJobList = () => {
   }, [currentUser])
 
   return (
-    <div>
+    <div
+      className={` transition-all duration-300 ${
+        !isOpen ? 'w-0 opacity-0  -z-30' : 'w-auto opacity-[1]'
+      }`}
+    >
       <ul className="flex flex-col gap-y-4">
         {appliedJobsDetails.map((job, index) => (
           <li key={index}>
