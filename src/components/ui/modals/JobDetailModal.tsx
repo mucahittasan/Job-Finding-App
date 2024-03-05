@@ -75,35 +75,41 @@ const JobDetailModal = () => {
   ) : (
     <div className="text-dark pb-2 flex flex-col gap-y-2">
       <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
-        <span className="font-bold text-lg text-primary_color">
+        <span className="font-bold md:text-lg text-base text-primary_color">
           Company Name:
         </span>
-        <span className="text-base text-gray_color font-semibold">
+        <span className="md:text-base text-sm text-gray_color font-semibold">
           {job?.companyName}
         </span>
       </div>
       <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
-        <span className="font-bold text-lg text-primary_color">Job Name:</span>
-        <span className="text-base text-gray_color font-semibold">
+        <span className="font-bold md:text-lg text-base text-primary_color">
+          Job Name:
+        </span>
+        <span className="md:text-base text-sm text-gray_color font-semibold">
           {job?.name}
         </span>
       </div>
       <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
-        <span className="font-bold text-lg text-primary_color">
+        <span className="font-bold md:text-lg text-base text-primary_color">
           Created At:
         </span>
-        <span className="text-base text-gray_color font-semibold">
+        <span className="md:text-base text-sm text-gray_color font-semibold">
           {formattedDate}
         </span>
       </div>
       <div className="flex sm:flex-row flex-col gap-x-2 sm:items-center items-start">
-        <span className="font-bold text-lg text-primary_color">Location: </span>
-        <span className="text-base text-gray_color font-semibold">
+        <span className="font-bold md:text-lg text-base text-primary_color">
+          Location:{' '}
+        </span>
+        <span className="md:text-base text-sm text-gray_color font-semibold">
           {job?.location}
         </span>
       </div>
       <div className="flex flex-col gap-y-2">
-        <span className="font-bold text-lg text-primary_color">Keywords: </span>
+        <span className="font-bold md:text-lg text-base text-primary_color">
+          Keywords:{' '}
+        </span>
         <div className="flex gap-2 flex-wrap mb-2">
           {job?.keywords.map((keyword: string, i: number) => (
             <div
@@ -116,13 +122,15 @@ const JobDetailModal = () => {
         </div>
       </div>
       <div className="flex gap-x-2 items-center">
-        <span className="font-bold text-lg text-primary_color">Salary: </span>
+        <span className="font-bold md:text-lg text-base text-primary_color">
+          Salary:{' '}
+        </span>
         <span className="text-base text-gray_color font-semibold">
           {job?.salary} $
         </span>
       </div>
       <div>
-        <span className="font-bold text-lg text-primary_color">
+        <span className="font-bold md:text-lg text-base text-primary_color">
           Job Description
         </span>
         <p className="text-sm font-medium text-gray_color border-2 border-gray_color/20 p-2 rounded-lg max-h-[100px] overflow-y-auto">
