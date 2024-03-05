@@ -63,7 +63,7 @@ const FilterMenu = () => {
           open
             ? 'z-10 opacity-[1] visible translate-y-0'
             : 'opacity-0 invisible translate-y-2 -z-50'
-        } absolute transition-all duration-200 bg-white text-dark rounded-md w-[200px] p-2 md:right-0 left-0 top-14`}
+        } absolute transition-all duration-200 bg-white text-dark rounded-md w-[200px] p-2 md:right-0 md:left-auto right-auto left-0 top-14`}
       >
         <div className="font-bold border-b border-b-gray_color/30 text-dark flex items-center justify-between pb-1">
           <span className="text-dark">FIELDS</span>
