@@ -72,17 +72,17 @@ const JobItem: FC<JobItemProps> = ({
       variants={jobItemVariants}
       initial="hidden"
       animate="visible"
-      className="flex justify-between border-b border-b-gray_color/50 py-4"
+      className="flex md:flex-row flex-col justify-between border-b border-b-gray_color/50 py-4 "
     >
       <div className="flex gap-4">
         <Briefcase
           size={50}
-          className="min-w-[50px]"
+          className="md:min-w-[50px] min-w-[30px]"
         />
         <div className="flex flex-col items-start gap-y-4 ">
-          <div className="flex items-center gap-x-2 text-2xl font-bold">
+          <div className="flex md:flex-row flex-col md:items-center gap-x-2 md:text-2xl text-xl font-bold">
             <h3>{companyName}</h3>
-            <span>-</span>
+            <span className="md:inline-block hidden">-</span>
             <h3 className="text-zinc-400">{jobName}</h3>
           </div>
           <p className="text-sm font-medium text-gray-400 max-w-[80%]">

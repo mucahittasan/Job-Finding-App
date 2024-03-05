@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { fetchCurrentUser } from '../../../actions/user'
 import Popover from '../../ui/popover'
+import ToggleSidebarButton from '../jobs/sidebar/ToggleSidebarButton'
 
 const HeaderContent = () => {
   const registerModal = useRegisterModal()
@@ -66,7 +67,7 @@ const HeaderContent = () => {
       >
         ACME
       </Link>
-      <div className="flex gap-x-4">
+      <div className="flex items-center gap-x-4">
         {loading ? (
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         ) : loginModal.currentUser ? (
@@ -74,7 +75,7 @@ const HeaderContent = () => {
             <Button
               onClick={() => setPopover((prev) => !prev)}
               variant={'primary'}
-              className="font-semibold md:text-base text-xs bg-white/20 text-white hover:!bg-white/10"
+              className="font-semibold  bg-white/20 text-white hover:!bg-white/10 md:!px-4 !px-1"
             >
               <Image
                 src={loginModal.currentUser?.profileImage ?? ''}
@@ -83,7 +84,7 @@ const HeaderContent = () => {
                 height={30}
                 className="rounded-full aspect-square object-cover"
               />
-              <span className="text-white text-sm">
+              <span className="text-white md:text-sm text-xs">
                 {loginModal.currentUser?.email &&
                   loginModal.currentUser.email.split('@')[0]}
               </span>{' '}
@@ -130,6 +131,9 @@ const HeaderContent = () => {
             </Button>
           </>
         )}
+        <div className="lg:hidden block py-6 px-1">
+          <ToggleSidebarButton />
+        </div>
       </div>
     </header>
   )

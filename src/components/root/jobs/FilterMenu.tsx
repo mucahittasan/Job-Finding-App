@@ -50,7 +50,7 @@ const FilterMenu = () => {
         onClick={() => setOpen((prev) => !prev)}
         className="bg-gradient-to-tr from-primary_color to-secondary_color hover:from-primary_color/80 hover:to-secondary_color/90 text-white font-semibold active:scale-[.97] "
       >
-        <span>Select a Field</span>
+        <span className="md:!text-sm !text-xs">Select a Field</span>
         <ChevronDown
           size={20}
           className={`transition duration-200 ${
@@ -63,7 +63,7 @@ const FilterMenu = () => {
           open
             ? 'z-10 opacity-[1] visible translate-y-0'
             : 'opacity-0 invisible translate-y-2 -z-50'
-        } absolute transition-all duration-200 bg-white text-dark rounded-md w-[200px] p-2 right-0 top-14`}
+        } absolute transition-all duration-200 bg-white text-dark rounded-md w-[200px] p-2 md:right-0 left-0 top-14`}
       >
         <div className="font-bold border-b border-b-gray_color/30 text-dark flex items-center justify-between pb-1">
           <span className="text-dark">FIELDS</span>

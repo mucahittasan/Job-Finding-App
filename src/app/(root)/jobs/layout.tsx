@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 
 import Header from '@/components/root/header/Header'
 import AppliedJobSidebar from '@/components/root/jobs/sidebar/AppliedJobSidebar'
-import ToggleSidebarButton from '@/components/root/jobs/sidebar/ToggleSidebarButton'
 import JobDetailModal from '@/components/ui/modals/JobDetailModal'
 
 export const metadata: Metadata = {
@@ -18,15 +17,13 @@ export default function Layout({
 }>) {
   return (
     <div className="flex gap-x-4">
-      <div className="flex-[2.8]">
+      <div className="md:flex-[2.8] w-full">
         <Header />
         <JobDetailModal />
 
         {children}
       </div>
-      <div className="lg:hidden block py-6 px-1">
-        <ToggleSidebarButton />
-      </div>
+
       <AppliedJobSidebar />
     </div>
   )

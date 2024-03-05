@@ -12,7 +12,7 @@ const Page = () => {
   }
 
   return (
-    <div className="px-4">
+    <div className="md:px-4 px-1">
       <JobsHeader />
       <JobsList />
     </div>

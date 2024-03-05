@@ -35,9 +35,9 @@ const JobsPagination = () => {
   }
   if (!mounted) return null
   return (
-    <div className="flex items-center justify-between bg-[rgb(133,133,133)]/10 min-h-[50px] rounded-md px-2 mt-4">
-      <div></div>
-      <div className="flex items-center gap-x-4">
+    <div className="flex items-center md:flex-row flex-col justify-between bg-[rgb(133,133,133)]/10 sm:min-h-[50px] sm:py-0 py-2 rounded-md px-2 mt-4 gap-y-4">
+      <div className="sm:inline-block hidden"></div>
+      <div className="flex items-center gap-x-4 order-2">
         <Button
           onClick={() => handlePrev()}
           className={`h-[25px] ${
@@ -67,7 +67,7 @@ const JobsPagination = () => {
           Next
         </Button>
       </div>
-      <div className="flex gap-x-2 items-center">
+      <div className="flex gap-x-2 items-center order-1">
         <span className="font-semibold text-sm">Show</span>
         <Button
           variant="secondary"
@@ -94,7 +94,12 @@ const JobsPagination = () => {
           </Popover>
           <span>{showCount}</span>
           <span className="h-full w-[2px] bg-gray_color"></span>
-          <ChevronDown size={12} />
+          <ChevronDown
+            className={`transition-all duration-200 ${
+              openShowCount ? 'rotate-180' : 'rotate-0'
+            }`}
+            size={12}
+          />
         </Button>
       </div>
     </div>
