@@ -9,6 +9,15 @@ import Cookies from 'js-cookie'
 import { Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import {
+  MotionDiv,
+  MotionLi,
+  MotionUl,
+} from '../../../../utils/motions/Motions'
+import {
+  jobItemVariants,
+  jobListVariants,
+} from '../../../../utils/motions/Variant'
 import AppliedJobCard from './AppliedJobCard'
 
 const AppliedJobList = () => {
@@ -83,19 +92,27 @@ const AppliedJobList = () => {
   }
 
   return (
-    <div
+    <MotionDiv
       className={` transition-all duration-300 lg:max-w-[100%] sm:max-w-[90%] max-w-[98%] mx-auto max-h-[calc(100vh-254px)] overflow-y-auto px-3 ${
-        !isOpen ? 'w-0 opacity-0  -z-30' : 'w-auto opacity-[1]'
+        !isOpen ? 'w-0 !opacity-0  -z-30' : 'w-auto opacity-[1]'
       }`}
+      variants={jobListVariants}
+      initial="hidden"
+      animate="visible"
     >
-      <ul className="flex flex-col gap-y-4">
+      <MotionUl className="flex flex-col gap-y-4">
         {appliedJobsDetails.map((job, index) => (
-          <li key={index}>
+          <MotionLi
+            variants={jobItemVariants}
+            initial="hidden"
+            animate="visible"
+            key={index}
+          >
             <AppliedJobCard job={job} />
-          </li>
+          </MotionLi>
         ))}
-      </ul>
-    </div>
+      </MotionUl>
+    </MotionDiv>
   )
 }
 
