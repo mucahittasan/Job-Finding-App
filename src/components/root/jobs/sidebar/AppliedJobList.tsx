@@ -42,8 +42,9 @@ const AppliedJobList = () => {
             setIsLoading(false)
           }
         }
-
         setAppliedJobsDetails(jobsDetails)
+      } else {
+        setAppliedJobsDetails([])
       }
     }
 
