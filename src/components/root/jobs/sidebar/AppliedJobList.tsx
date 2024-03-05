@@ -52,7 +52,13 @@ const AppliedJobList = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center">
+      <div
+        className={`flex justify-center items-center ${
+          !isOpen
+            ? 'w-0 opacity-0  -z-30'
+            : 'w-auto opacity-[1] flex flex-col items-center'
+        }`}
+      >
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       </div>
     )

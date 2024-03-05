@@ -37,7 +37,7 @@ const JobsPagination = () => {
   return (
     <div className="flex items-center md:flex-row flex-col justify-between bg-[rgb(133,133,133)]/10 sm:min-h-[50px] sm:py-0 py-2 rounded-md px-2 mt-4 gap-y-4">
       <div className="sm:inline-block hidden"></div>
-      <div className="flex items-center gap-x-4 order-2">
+      <div className="flex items-center gap-x-4 sm:order-1 order-2">
         <Button
           onClick={() => handlePrev()}
           className={`h-[25px] ${
@@ -67,7 +67,7 @@ const JobsPagination = () => {
           Next
         </Button>
       </div>
-      <div className="flex gap-x-2 items-center order-1">
+      <div className="flex gap-x-2 items-center sm:order-2 order-1">
         <span className="font-semibold text-sm">Show</span>
         <Button
           variant="secondary"
