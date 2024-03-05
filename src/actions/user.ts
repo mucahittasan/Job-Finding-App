@@ -47,7 +47,6 @@ export const refreshAccessToken = async (refreshToken: string) => {
 }
 
 export const fetchCurrentUser = async (accessToken?: string) => {
-  console.log(accessToken)
   if (accessToken) {
     try {
       const res = await axios.get('/api/user/', {

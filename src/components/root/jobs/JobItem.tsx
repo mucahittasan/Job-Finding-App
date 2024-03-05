@@ -7,7 +7,7 @@ import { jobItemVariants } from '@/utils/motions/Variant'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { Briefcase } from 'lucide-react'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import toast from 'react-hot-toast'
 import { fetchCurrentUser } from '../../../actions/user'
 import { withdrawJoburl } from '../../../constants/urls'
@@ -66,10 +66,6 @@ const JobItem: FC<JobItemProps> = ({
       setIsLoading(false)
     }
   }
-
-  useEffect(() => {
-    console.log(loginModal.currentUser)
-  }, [loginModal.currentUser])
 
   return (
     <MotionDiv
