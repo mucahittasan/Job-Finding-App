@@ -1,5 +1,6 @@
 'use client'
 
+import useLoginModal from '@/hooks/modals/useLoginModal'
 import useSidebarToggle from '@/hooks/useSidebarToggle'
 import { useEffect, useState } from 'react'
 import AppliedJobList from './AppliedJobList'
@@ -7,6 +8,8 @@ import SidebarLogo from './SidebarLogo'
 
 const AppliedJobSidebar = () => {
   const { isOpen, toggleSidebar } = useSidebarToggle()
+  const { currentUser } = useLoginModal()
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   useEffect(() => {
@@ -31,6 +34,10 @@ const AppliedJobSidebar = () => {
       !isOpen && toggleSidebar()
     }
   }, [windowWidth])
+
+  if (!currentUser) {
+    return null
+  }
 
   return (
     <div
