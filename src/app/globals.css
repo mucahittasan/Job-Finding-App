@@ -2,3 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+
+  body {
+    overflow-x: hidden;
+  }
+
+    .content {
+        @apply max-w-[1100px] mx-auto w-full
+      }
+
+      ::-webkit-scrollbar{
+        width: 12px;
+      }
+    
+      ::-webkit-scrollbar-thumb{
+          @apply bg-gradient-to-t from-primary_color to-transparent
+      }
+}
