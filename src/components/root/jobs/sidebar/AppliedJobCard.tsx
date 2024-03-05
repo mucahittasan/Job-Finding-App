@@ -11,7 +11,7 @@ const AppliedJobCard = ({ job }: { job: Job }) => {
           <span className="font-bold text-base text-primary_color">
             Company Name:
           </span>
-          <span className="text-sm text-gray_color font-semibold">
+          <span className="text-sm text-gray-400 font-semibold">
             {job.companyName}
           </span>
         </div>
@@ -19,7 +19,7 @@ const AppliedJobCard = ({ job }: { job: Job }) => {
           <span className="font-bold text-base text-primary_color">
             Location:
           </span>
-          <span className="text-sm text-gray_color font-semibold">
+          <span className="text-sm text-gray-400 font-semibold">
             {job.location}
           </span>
         </div>

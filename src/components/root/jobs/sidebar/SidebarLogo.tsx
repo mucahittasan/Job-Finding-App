@@ -2,21 +2,18 @@
 
 import useLoginModal from '@/hooks/modals/useLoginModal'
 import useSidebarToggle from '@/hooks/useSidebarToggle'
-import { MenuIcon } from 'lucide-react'
 import Image from 'next/image'
+import ToggleSidebarButton from './ToggleSidebarButton'
 
 const SidebarLogo = () => {
   const { currentUser } = useLoginModal()
-  const { toggleSidebar, isOpen } = useSidebarToggle()
+  const { isOpen } = useSidebarToggle()
 
   return (
     <div className="flex w-full justify-between items-start">
-      <button
-        onClick={() => toggleSidebar()}
-        className="cursor-pointer border border-gray_color rounded-md bg-gray_color/60 p-0.5 hover:bg-gray_color/80 transition-all"
-      >
-        <MenuIcon size={22} />
-      </button>
+      <div>
+        <ToggleSidebarButton />
+      </div>
       <div
         className={`flex flex-col items-center gap-y-4  ${
           !isOpen ? 'w-0 opacity-0 -z-30' : 'w-auto opacity-[1]'

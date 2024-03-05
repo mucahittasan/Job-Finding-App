@@ -34,9 +34,13 @@ const AppliedJobSidebar = () => {
 
   return (
     <div
-      className={` transition-all duration-300 ${
-        !isOpen ? 'w-[40px] px-1 ' : 'flex-1 px-4'
-      } py-6 `}
+      className={` transition-all duration-300  py-6 lg:static fixed lg:bg-transparent bg-dark/95 lg:w-auto w-full lg:translate-y-0 lg:h-auto h-screen
+      ${
+        !isOpen
+          ? 'w-[40px] px-1 -translate-y-full'
+          : 'flex-1 px-4 translate-y-[0] '
+      } 
+      `}
     >
       <SidebarLogo />
       <h2

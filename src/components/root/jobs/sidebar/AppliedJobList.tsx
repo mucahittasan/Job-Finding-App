@@ -44,7 +44,7 @@ const AppliedJobList = () => {
 
   return (
     <div
-      className={` transition-all duration-300 ${
+      className={` transition-all duration-300 lg:max-w-auto max-w-[90%] mx-auto ${
         !isOpen ? 'w-0 opacity-0  -z-30' : 'w-auto opacity-[1]'
       }`}
     >
