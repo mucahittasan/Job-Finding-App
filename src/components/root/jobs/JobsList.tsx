@@ -51,6 +51,7 @@ const JobsList = () => {
     queryFn: getJobs,
     enabled: false,
   })
+
   useEffect(() => {
     refetch()
   }, [

@@ -131,9 +131,11 @@ const HeaderContent = () => {
             </Button>
           </>
         )}
-        <div className="lg:hidden block py-6 px-1">
-          <ToggleSidebarButton />
-        </div>
+        {pathname !== '/' && (
+          <div className="lg:hidden block py-6 px-1">
+            <ToggleSidebarButton />
+          </div>
+        )}
       </div>
     </header>
   )
