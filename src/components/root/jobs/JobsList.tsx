@@ -84,7 +84,7 @@ const JobsList = () => {
       variants={jobListVariants}
       initial="hidden"
       animate="visible"
-      className="lg:max-h-[calc(100vh-173px)] md:max-h-[calc(100vh-201px)] max-h-[calc(100vh-255px)] h-full overflow-y-auto md:px-12 px-4 py-6 flex flex-col overflow-x-hidden "
+      className="lg:max-h-[calc(100vh-173px)] md:max-h-[calc(100vh-201px)] max-h-[calc(100vh-224px)] h-full overflow-y-auto md:px-12 px-4 py-6 flex flex-col overflow-x-hidden "
     >
       {jobs?.data?.length === 0 ? (
         <div className="flex gap-x-4 items-center">

@@ -57,7 +57,7 @@ const HeaderContent = () => {
 
   return (
     <header
-      className={`flex px-4 py-6 items-center justify-between ${
+      className={`flex px-4 md:py-6 py-2 items-center justify-between ${
         pathname === '/' && 'content'
       }`}
     >
