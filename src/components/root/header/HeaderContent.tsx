@@ -32,6 +32,7 @@ const HeaderContent = () => {
     setPopover(false)
     router.push('/')
   }
+
   useEffect(() => {
     const getCurrentUser = async () => {
       setLoading(true)

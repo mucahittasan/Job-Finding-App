@@ -12,6 +12,7 @@ import toast from 'react-hot-toast'
 import Modal from '.'
 import { fetchCurrentUser } from '../../../actions/user'
 import useLoginModal from '../../../hooks/modals/useLoginModal'
+
 const JobDetailModal = () => {
   const { currentJob, isOpen, onClose } = useJobDetailModal()
   const loginModal = useLoginModal()

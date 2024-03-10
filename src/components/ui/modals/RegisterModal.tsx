@@ -4,8 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 import { RegisterSchema } from '@/schemas'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import Input from '../Input'
 import Modal from './index'
 
@@ -19,9 +17,6 @@ import { registerUser } from '../../../actions/user'
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
-
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const {
     register,

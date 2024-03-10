@@ -27,7 +27,6 @@ export const fetchJobs = async (
         },
       ]
     : []
-
   const response = await fetch(
     `${getAllJobs(baseQuery)}&${GenerateQuery(...searchQueryParams)}`,
     {
