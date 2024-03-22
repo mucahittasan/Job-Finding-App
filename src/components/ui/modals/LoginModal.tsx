@@ -100,7 +100,7 @@ const LoginModal = () => {
   const footerContent = (
     <footer className="text-center ">
       <p className="text-xs font-medium text-dark">
-        Don't you have an account?{' '}
+        Don&apos;t you have an account?
         <button
           onClick={() => {
             loginModal.onClose()
@@ -109,7 +109,7 @@ const LoginModal = () => {
           className="text-primary_color font-semibold hover:underline"
         >
           Sign up.
-        </button>{' '}
+        </button>
       </p>
     </footer>
   )
