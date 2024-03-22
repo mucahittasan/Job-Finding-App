@@ -1,7 +1,6 @@
 export const GenerateQuery = (
   ...args: { key: string; value?: string | Record<string, string> }[]
 ) => {
-  // encodeQueryParam adlı iç içe fonksiyonun tanımı
   const encodeQueryParam = (
     key: string,
     value?: string | Record<string, string>,

@@ -113,9 +113,7 @@ const HeaderContent = () => {
         ) : (
           <>
             <Button
-              onClick={() => {
-                loginModal.onOpen()
-              }}
+              onClick={loginModal.onOpen}
               variant={'primary'}
               className="font-semibold md:text-base text-xs md:h-10 h-8 transition duration-200 hover:scale-[1.05] w-[98px]"
             >

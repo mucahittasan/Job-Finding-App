@@ -21,7 +21,7 @@ export async function registerUser(userData: {
     const response = await axios.post(registerUrl(), userData, { headers })
     return response.data
   } catch (error: any) {
-    throw error.response?.data || error.message
+    throw error.response?.data ?? error.message
   }
 }
 
