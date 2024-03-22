@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 
 type SidebarToggleState = {
   isOpen: boolean
@@ -6,7 +6,8 @@ type SidebarToggleState = {
 }
 
 const useSidebarToggle = create<SidebarToggleState>((set) => {
-  const initialIsOpen = window.innerWidth >= 1024
+  const initialIsOpen =
+    typeof window !== 'undefined' ? window.innerWidth >= 1024 : false
 
   return {
     isOpen: initialIsOpen,
